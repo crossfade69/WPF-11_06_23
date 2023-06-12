@@ -18,7 +18,7 @@ namespace WpfProjekt.MVVM.View
     /// <summary>
     /// Logika interakcji dla klasy GameView.xaml
     /// </summary>
-    public partial class GameView : Page
+    public partial class GameView : UserControl
     {
         public GameView()
         {
