@@ -25,7 +25,7 @@ namespace WpfProjekt
         private Session session;
         public MainWindow()
         {
-            session = Session.instance;
+            session = Session.GetInstance();
             InitializeComponent();
         }
 

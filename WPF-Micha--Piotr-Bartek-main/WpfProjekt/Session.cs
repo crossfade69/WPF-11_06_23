@@ -10,8 +10,14 @@ using WpfProjekt;
 public class Session
     {
     public User currentUser;
-    public static Session instance=new Session();
+    private static Session instance;
     public DataBase dataBase;
+    public static Session GetInstance()
+    {
+        if(instance==null)
+            instance = new Session();
+        return instance;
+    }
     private Session() 
     {
         dataBase = new DataBase();

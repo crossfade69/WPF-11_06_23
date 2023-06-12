@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -11,7 +12,9 @@ namespace WpfProjekt
     {               
         public List<Game> games = new List<Game>()
         {
-            new Game("Mario",DateTime.Now,@"C:\Users\Bartek\Documents\GitHub\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\Images\mario.png")
+            
+            
+            new Game("Mario",DateTime.Now,Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString()+@"\Images\mario.png")
         };
         //KONTA MUSZĄ BYĆ UNIKALNE
         public List<User> users { get; set; }=new List<User>() {
