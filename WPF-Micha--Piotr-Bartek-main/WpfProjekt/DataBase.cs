@@ -5,38 +5,23 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
+namespace WpfProjekt
+{
     public class DataBase
-    {
-    public List<User> users = new List<User>();
-    public List<Game> allGames = new List<Game>();
-    public DataBase() 
-    {
-
-    }  
-    public User Login(string log,string pas)
-    {
-        foreach (var user in users) 
+    {               
+        public List<Game> games = new List<Game>()
         {
-            if(user.Login==log&&user.password==pas)
-                return user;
-        }
-
-        return null;
-    }
-    public List<Game> GetUserGames(List<int> ids) 
-    {
-        List<Game> currGames = new List<Game>();
-        foreach(int id in ids)
+            new Game("Mario",DateTime.Now,@"C:\Users\Bartek\Documents\GitHub\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\Images\mario.png")
+        };
+        //KONTA MUSZĄ BYĆ UNIKALNE
+        public List<User> users { get; set; }=new List<User>() {
+        new User("Piotrek","haslo",false),
+        new User("Bartek","Bartek",false),
+        new User("Michał","Napiórkowski",false),
+        };
+        public User Login(string login,string pass)// zwraca null w przypadku braku konta
         {
-            foreach(Game game in allGames)
-            {
-                if(game.id==id)
-                currGames.Add(game);
-            }
+            return users.Where(u => u.login == login).FirstOrDefault();
         }
-        return currGames;
     }
-    
-
-    }
-
+}

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataBase.cs" />
     <Compile Include="EditProfWindow.xaml.cs">
       <DependentUpon>EditProfWindow.xaml</DependentUpon>
     </Compile>
@@ -90,7 +91,6 @@
     </Compile>
     <Compile Include="Core\ObservableObj.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="DataBase.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -166,8 +166,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
-    <Folder Include="Images\" />
     <Folder Include="MVVM\Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\gamepad.png" />
+    <Resource Include="Images\mario.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -20,8 +20,12 @@ namespace WpfProjekt
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isDragging;
+        private Point startPoint;
+        private Session session;
         public MainWindow()
         {
+            session = Session.instance;
             InitializeComponent();
         }
 
@@ -47,8 +51,7 @@ namespace WpfProjekt
             WindowState = WindowState.Minimized;
         }
 
-        private bool isDragging;
-        private Point startPoint;
+
 
         private void WindowDrag(object sender, MouseButtonEventArgs e)
         {
@@ -81,5 +84,12 @@ namespace WpfProjekt
             }
         }
 
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            session.Login("Michał", "Napiórkowski");
+            //MessageBox.Show(session.currentUser.login);
+            imageTest.Source = session.game();
+            
+        }
     }
 }
