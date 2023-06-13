@@ -10,7 +10,7 @@
         Height="600" Width="920"
         WindowStyle = "None"
         ResizeMode="CanResize" 
-        
+        MouseLeftButtonDown="WindowDrag"
         Background="#272537"
         AllowsTransparency="True">
 
