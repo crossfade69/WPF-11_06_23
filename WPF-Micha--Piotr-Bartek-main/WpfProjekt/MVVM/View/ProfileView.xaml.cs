@@ -24,5 +24,12 @@ namespace WpfProjekt.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void ProfEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditProfWindow editWindow = new EditProfWindow();
+            editWindow.Show();
+            
+        }
     }
 }

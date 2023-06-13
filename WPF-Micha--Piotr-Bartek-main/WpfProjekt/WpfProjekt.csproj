@@ -57,7 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="CategoryEnum.cs" />
     <Compile Include="DataBase.cs" />
-    <Compile Include="EditProfWindow.xaml.cs">
+    <Compile Include="MVVM\ViewModel\EditProfWindowModel.cs" />
+    <Compile Include="MVVM\View\EditProfWindow.xaml.cs">
       <DependentUpon>EditProfWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ViewModel\GameViewModel.cs" />
@@ -78,7 +79,7 @@
     </Compile>
     <Compile Include="Session.cs" />
     <Compile Include="User.cs" />
-    <Page Include="EditProfWindow.xaml">
+    <Page Include="MVVM\View\EditProfWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

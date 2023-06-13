@@ -11,22 +11,23 @@
     <Grid>
         <!-- Profile Picture 
         <Image Source="profile_picture.jpg" Width="100" Height="100" HorizontalAlignment="Left" Margin="20" />-->
-        
+
         <!-- Profile Information -->
         <StackPanel HorizontalAlignment="Left" Margin="140,20,0,0">
             <!-- Username -->
             <TextBlock Text="Username" FontSize="20" FontWeight="Bold" Foreground="White" />
+            <TextBlock Text="Level: 50" Foreground="White" />
+            <Button x:Name="ProfEditButton" Content="Edit" Width="76" Margin="510 0 0 0" Height="33" Click="ProfEditButton_Click"/>
+            <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et &#xA; lacinia leo commodo nec." Foreground="White" Height="50" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="640" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0,0.5" />
 
             <!-- Level -->
-            <TextBlock Text="Level: 50" Margin="0,5,0,0" Foreground="White" />
 
             <!-- Description -->
-            <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et &#x0a; lacinia leo commodo nec." Margin="0,20,0,0" Foreground="White" Height="44" ScrollViewer.VerticalScrollBarVisibility="Auto" Width="640" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0,0.5" />
 
             <!-- Games Played -->
         </StackPanel>
 
-        
+
         <ListBox Margin="20,150,20,20" Background="#FF757575">
             <ListBoxItem Foreground="White">
                 <StackPanel Orientation="Horizontal">
