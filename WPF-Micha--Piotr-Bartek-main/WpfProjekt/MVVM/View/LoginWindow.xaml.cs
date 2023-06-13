@@ -81,6 +81,30 @@ namespace WpfProjekt.MVVM.View
             }
         }
 
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            string username = UsernameTextBox.Text;
+            string password = PasswordTextBox.Text;
+
+            if (ValidateLogin(username, password))
+            {
+                // Successful login
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show(); // Show the main program window
+                Close(); // Close the login window
+            }
+            else
+            {
+                // Incorrect login
+                MessageBox.Show("Incorrect username or password!");
+            }
+        }
+        private bool ValidateLogin(string username, string password)
+        {
+            // Add your login validation logic here
+            // For simplicity, let's assume the correct username is "admin" and password is "password"
+            return (username == "admin" && password == "password");
+        }
     }
 }
 

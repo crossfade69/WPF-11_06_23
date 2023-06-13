@@ -55,7 +55,7 @@ namespace WpfProjekt
 
         private void WindowDrag(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            this.DragMove();
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -84,7 +84,7 @@ namespace WpfProjekt
             }
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void LoginCheck(object sender, RoutedEventArgs e)
         {
             session.Login("Michał", "Napiórkowski");
             //MessageBox.Show(session.currentUser.login);
