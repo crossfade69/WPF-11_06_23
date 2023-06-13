@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Bartek\Documents\GitHub\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\
+C:\Users\Bartek\Source\Repos\crossfade69\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\
 WpfProjekt
 none
 false
 DEBUG;TRACE
-C:\Users\Bartek\Documents\GitHub\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\App.xaml
+C:\Users\Bartek\Source\Repos\crossfade69\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\App.xaml
 10-1057728768
 
-26770112315
+27-695317864
 13-1310406943
 EditProfWindow.xaml;MainWindow.xaml;MVVM\View\DiscoveryV.xaml;MVVM\View\GameView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\ProfileView.xaml;MVVM\View\ShopView.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxTheme.xaml;
 
-False
+True
 

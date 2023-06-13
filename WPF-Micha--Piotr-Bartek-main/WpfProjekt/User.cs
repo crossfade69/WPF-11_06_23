@@ -20,13 +20,19 @@ public class User
     public BitmapImage avatar = null;
 
     public List<int> games { get; set; }
-    public User(string n,string p,bool isA) 
+    public User(string n,string p,bool isA,List<int> gamesList, string imageDir) 
     {
+        BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
+        newImage.BeginInit();
+        newImage.UriSource = new Uri(imageDir);
+        newImage.EndInit();
+        avatar = newImage;
+
         this.password = p;
         isAdmin = isA;
         this.login = n;
         id= idCount++;
-        games = new List<int>();
+        games = gamesList;
     }
 
     

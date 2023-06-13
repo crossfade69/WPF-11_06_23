@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using WpfProjekt;
 
-public class Session
+public class Session // statyczny obiekt sesji w którym znajdują się wszytkie potrzebne
+                     // informacje takie jak database oraz teraźniejszy uzytkownik
     {
     public User currentUser;
     private static Session instance;
     public DataBase dataBase;
-    public static Session GetInstance()
+    public static Session GetInstance()// tą funkcją pobieramy naszą sesje
     {
         if(instance==null)
             instance = new Session();

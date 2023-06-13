@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CategoryEnum.cs" />
     <Compile Include="DataBase.cs" />
     <Compile Include="EditProfWindow.xaml.cs">
       <DependentUpon>EditProfWindow.xaml</DependentUpon>
