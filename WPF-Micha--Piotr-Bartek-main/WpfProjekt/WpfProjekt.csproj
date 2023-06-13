@@ -173,5 +173,8 @@
     <Resource Include="Images\gamepad.png" />
     <Resource Include="Images\mario.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\default_user.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

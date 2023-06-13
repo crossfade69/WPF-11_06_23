@@ -88,7 +88,6 @@ namespace WpfProjekt
         {
             session.Login("Michał", "Napiórkowski");
             //MessageBox.Show(session.currentUser.login);
-            imageTest.Source = session.game();
             
         }
     }

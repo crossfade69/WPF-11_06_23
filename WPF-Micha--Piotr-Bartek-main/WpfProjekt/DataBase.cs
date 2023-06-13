@@ -15,9 +15,9 @@ namespace WpfProjekt
         {
             
             
-            new Game("Mario",CategoryEnum.adventure,dir+@"\Images\mario.png",4.8f),
-            new Game("Mario2",CategoryEnum.adventure,dir+@"\Images\mario.png",4.7f),
-            new Game("Smash bros",CategoryEnum.fighting,dir+@"\Images\mario.png",4.7f),
+            new Game("Mario",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.8f),
+            new Game("Mario2",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.7f),
+            new Game("Smash bros",CategoryEnum.fighting,dir+@"\Images\default_user.png",4.7f),
         };
         //KONTA MUSZĄ BYĆ UNIKALNE
         public List<User> users { get; set; }=new List<User>() {

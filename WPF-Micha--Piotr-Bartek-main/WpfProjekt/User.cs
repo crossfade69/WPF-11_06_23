@@ -19,7 +19,7 @@ public class User
 
     public BitmapImage avatar = null;
 
-    public List<int> games { get; set; }
+    public List<int> games { get; set; }// user trzyma id do gier a nie cale obiekty
     public User(string n,string p,bool isA,List<int> gamesList, string imageDir) 
     {
         BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac

@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\WPF-Micha--Piotr-Bartek-main"
+    "\\WPF-Micha--Piotr-Bartek-main",
+    "\\WPF-Micha--Piotr-Bartek-main\\WpfProjekt"
   ],
-  "SelectedNode": "\\WPF-Micha--Piotr-Bartek-main\\WpfProjekt.sln",
+  "SelectedNode": "\\WPF-Micha--Piotr-Bartek-main\\WpfProjekt\\MainWindow.xaml.cs",
   "PreviewInSolutionExplorer": false
 }
