@@ -84,7 +84,7 @@ namespace WpfProjekt.MVVM.View
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string username = UsernameTextBox.Text;
-            string password = PasswordTextBox.Text;
+            string password = PasswordTextBox.Password;
 
             if (ValidateLogin(username, password))
             {
@@ -104,6 +104,11 @@ namespace WpfProjekt.MVVM.View
             // Add your login validation logic here
             // For simplicity, let's assume the correct username is "admin" and password is "password"
             return (username == "admin" && password == "password");
+        }
+
+        private void UsernameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
