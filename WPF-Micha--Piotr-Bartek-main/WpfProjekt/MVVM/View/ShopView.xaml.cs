@@ -20,9 +20,13 @@ namespace WpfProjekt.MVVM.View
     /// </summary>
     public partial class ShopView : UserControl
     {
+
+        public List<Game> Games = Session.GetInstance().GetAllGames();
         public ShopView()
-        {
+        { 
+       
             InitializeComponent();
+            GamesInStoreListBox.ItemsSource = Games;
         }
     }
 }
