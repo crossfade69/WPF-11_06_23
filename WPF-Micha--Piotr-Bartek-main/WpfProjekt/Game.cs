@@ -17,21 +17,23 @@ public class Game
     public int id;
     public float rating;// ocena od 1 do 5
     public int votes = 1;//jak wiele osob glosowalo
-    public BitmapImage image;
+    //public BitmapImage image;
+    public string image;
     public CategoryEnum category;// typy gier są w enumie dla ułatwienia nam wpisywania
 
     public Game(string n, CategoryEnum cat, string imageDir, float rat)
     {
-        BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
-        newImage.BeginInit();
-        newImage.UriSource = new Uri(imageDir);
-        newImage.EndInit();
+        //BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
+        //newImage.BeginInit();
+        //newImage.UriSource = new Uri(imageDir);
+        //newImage.EndInit();
         id = idCount++;
 
         title = n;
         category = cat;
         rating = rat;
-        image = newImage;
+        //image = newImage;
+        image = imageDir;
     }
 }
 
