@@ -42,7 +42,7 @@ namespace WpfProjekt.MVVM.View
                 nameTextBlock.Text = game.title;
 
                 TextBlock categoryTextBlock = new TextBlock();
-                categoryTextBlock.Text = game.category.ToString(;
+                categoryTextBlock.Text = game.category.ToString();
 
                 TextBlock ratingTextBlock = new TextBlock();
                 ratingTextBlock.Text = game.rating.ToString();

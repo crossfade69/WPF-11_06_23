@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,44 @@ namespace WpfProjekt.MVVM.View
     /// </summary>
     public partial class ProfileView : UserControl
     {
+        public ObservableCollection<Game> Games = new ObservableCollection<Game>(Session.GetInstance().GetAllGames());
+
         public ProfileView()
         {
             InitializeComponent();
+            DataContext = this;
+            foreach (Game game in Games)
+            {
+                // Tworzenie elementu ListViewItem
+                ListViewItem item = new ListViewItem();
+
+                // Tworzenie elementów XAML dla poszczególnych atrybutów Game
+                StackPanel stackPanel = new StackPanel();
+
+                TextBlock nameTextBlock = new TextBlock();
+                nameTextBlock.Text = game.title;
+
+                TextBlock categoryTextBlock = new TextBlock();
+                categoryTextBlock.Text = game.category.ToString();
+
+                TextBlock ratingTextBlock = new TextBlock();
+                ratingTextBlock.Text = game.rating.ToString();
+
+                Image image = new Image();
+                image.Source = new BitmapImage(new Uri(game.image, UriKind.Relative));
+
+                // Dodawanie elementów XAML do StackPanel
+                stackPanel.Children.Add(nameTextBlock);
+                stackPanel.Children.Add(categoryTextBlock);
+                stackPanel.Children.Add(ratingTextBlock);
+                stackPanel.Children.Add(image);
+
+                // Ustawianie StackPanel jako zawartość elementu ListViewItem
+                item.Content = stackPanel;
+
+                // Dodawanie elementu ListViewItem do ListView
+                GamesInStoreListView.Items.Add(item);
+            }
         }
 
         private void ProfEditButton_Click(object sender, RoutedEventArgs e)
