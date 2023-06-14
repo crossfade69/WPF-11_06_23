@@ -10,19 +10,21 @@ using WpfProjekt;
 /// 
 ///  imageTest.Source = session.dataBase.games.FirstOrDefault().image;
 
-public class Game 
+public class Game
 {
     public static int idCount = 0; //kazda ma odzielne id
     public string title;
     public int id;
     public float rating;// ocena od 1 do 5
     public int votes = 1;//jak wiele osob glosowalo
-    //public BitmapImage image;
-    public string image;
+    public BitmapImage image;
+    //public string image;
     public CategoryEnum category;// typy gier są w enumie dla ułatwienia nam wpisywania
 
     public Game(string n, CategoryEnum cat, string imageDir, float rat)
     {
+        BitmapImage newImage = new BitmapImage(new Uri(imageDir, UriKind.Relative));
+
         //BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
         //newImage.BeginInit();
         //newImage.UriSource = new Uri(imageDir);
@@ -32,8 +34,8 @@ public class Game
         title = n;
         category = cat;
         rating = rat;
-        //image = newImage;
-        image = imageDir;
+        image = newImage;
+        //image = imageDir;
     }
 }
 

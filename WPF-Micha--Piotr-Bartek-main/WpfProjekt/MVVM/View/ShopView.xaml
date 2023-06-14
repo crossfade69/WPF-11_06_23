@@ -36,7 +36,6 @@
                         <TextBlock Text="{Binding category}" Grid.Column="1"/>
                         <TextBlock Text="{Binding rating}" Grid.Column="2"/>
                         <Image Source="{Binding image}" Width="100" Height="100" Grid.Column="3"/>
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

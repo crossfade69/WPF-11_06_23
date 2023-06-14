@@ -21,7 +21,7 @@ namespace WpfProjekt.MVVM.View
     /// </summary>
     public partial class ProfileView : UserControl
     {
-        public ObservableCollection<Game> Games = new ObservableCollection<Game>(Session.GetInstance().GetAllGames());
+        public ObservableCollection<Game> Games = new ObservableCollection<Game>(Session.GetInstance().GetUserGames());
 
         public ProfileView()
         {
@@ -45,7 +45,7 @@ namespace WpfProjekt.MVVM.View
                 ratingTextBlock.Text = game.rating.ToString();
 
                 Image image = new Image();
-                image.Source = new BitmapImage(new Uri(game.image, UriKind.Relative));
+                image.Source = game.image;
 
                 // Dodawanie elementów XAML do StackPanel
                 stackPanel.Children.Add(nameTextBlock);

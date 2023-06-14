@@ -24,10 +24,10 @@ namespace WpfProjekt.MVVM.View
     {
 
         public ObservableCollection<Game> Games = new ObservableCollection<Game>(Session.GetInstance().GetAllGames());
-        
+
         public ShopView()
-        { 
-       
+        {
+
             InitializeComponent();
             DataContext = this;
             foreach (Game game in Games)
@@ -48,7 +48,7 @@ namespace WpfProjekt.MVVM.View
                 ratingTextBlock.Text = game.rating.ToString();
 
                 Image image = new Image();
-                image.Source = new BitmapImage(new Uri(game.image, UriKind.Relative));
+                image.Source = game.image;
 
                 // Dodawanie elementów XAML do StackPanel
                 stackPanel.Children.Add(nameTextBlock);
@@ -65,3 +65,4 @@ namespace WpfProjekt.MVVM.View
         }
     }
 }
+
