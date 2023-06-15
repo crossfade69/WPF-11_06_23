@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WpfProjekt.MVVM.View
 {
     /// <summary>
@@ -20,9 +21,11 @@ namespace WpfProjekt.MVVM.View
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private Session session= Session.GetInstance();
         public LoginWindow()
         {
             InitializeComponent();
+            
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -88,22 +91,19 @@ namespace WpfProjekt.MVVM.View
 
             if (ValidateLogin(username, password))
             {
-                // Successful login
                 MainWindow mainWindow = new MainWindow();
-                mainWindow.Show(); // Show the main program window
-                Close(); // Close the login window
+                mainWindow.Show(); 
+                Close(); 
             }
             else
             {
-                // Incorrect login
                 MessageBox.Show("Incorrect username or password!");
             }
         }
         private bool ValidateLogin(string username, string password)
         {
-            // Add your login validation logic here
-            // For simplicity, let's assume the correct username is "admin" and password is "password"
-            return (username == "admin" && password == "password");
+            
+            return session.Login(username, password);
         }
 
         private void UsernameTextBox_TextChanged(object sender, TextChangedEventArgs e)

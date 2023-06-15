@@ -21,7 +21,7 @@
                 Command="{Binding BuyAndDownloadCommand}" />
 
 
-        <ListView Grid.Row="2" Name="GamesInStoreListView" Background="#FF232323" Foreground="White">
+        <ListView Grid.Row="2" Name="GamesInStoreListView" Background="#FF232323" Foreground="#FF8C8C8C">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Image" Width="150"/>
