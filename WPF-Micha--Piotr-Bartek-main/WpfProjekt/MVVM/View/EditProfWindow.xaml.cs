@@ -23,5 +23,15 @@ namespace WpfProjekt
         {
             InitializeComponent();
         }
+
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Udana edycja");
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Wylogowanie użytkownika");
+        }
     }
 }
