@@ -24,7 +24,7 @@
 
         <ListView Name="GamesInStoreListView" Background="#FF232323" Margin="36,167,36,30" Foreground="#FF8C8C8C">
             <ListView.Resources>
-                <Style TargetType="{x:Type ListViewItem}">
+                <Style TargetType="ListViewItem">
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#FF444444"/>
