@@ -23,12 +23,10 @@ public class Game
 
     public Game(string n, CategoryEnum cat, string imageDir, float rat)
     {
-        BitmapImage newImage = new BitmapImage(new Uri(imageDir, UriKind.Relative));
-
-        //BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
-        //newImage.BeginInit();
-        //newImage.UriSource = new Uri(imageDir);
-        //newImage.EndInit();
+        BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
+        newImage.BeginInit();
+        newImage.UriSource = new Uri(imageDir);
+        newImage.EndInit();
         id = idCount++;
 
         title = n;

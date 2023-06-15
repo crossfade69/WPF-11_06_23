@@ -32,11 +32,11 @@ namespace WpfProjekt.MVVM.View
             DataContext = this;
             foreach (Game game in Games)
             {
-                // Tworzenie elementu ListViewItem
-                ListViewItem item = new ListViewItem();
-
                 // Tworzenie elementów XAML dla poszczególnych atrybutów Game
-                StackPanel stackPanel = new StackPanel();
+                Image image = new Image();
+                image.Source = game.image;
+                image.Width = 100;
+                image.Height = 100;
 
                 TextBlock nameTextBlock = new TextBlock();
                 nameTextBlock.Text = game.title;
@@ -47,14 +47,18 @@ namespace WpfProjekt.MVVM.View
                 TextBlock ratingTextBlock = new TextBlock();
                 ratingTextBlock.Text = game.rating.ToString();
 
-                Image image = new Image();
-                image.Source = game.image;
+                // Tworzenie elementu ListViewItem
+                ListViewItem item = new ListViewItem();
+
+                // Tworzenie StackPanel i ustawianie orientacji
+                StackPanel stackPanel = new StackPanel();
+                stackPanel.Orientation = Orientation.Horizontal;
 
                 // Dodawanie elementów XAML do StackPanel
+                stackPanel.Children.Add(image);
                 stackPanel.Children.Add(nameTextBlock);
                 stackPanel.Children.Add(categoryTextBlock);
                 stackPanel.Children.Add(ratingTextBlock);
-                stackPanel.Children.Add(image);
 
                 // Ustawianie StackPanel jako zawartość elementu ListViewItem
                 item.Content = stackPanel;
