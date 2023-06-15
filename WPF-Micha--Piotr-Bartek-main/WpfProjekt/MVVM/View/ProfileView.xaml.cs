@@ -67,5 +67,10 @@ namespace WpfProjekt.MVVM.View
             editWindow.Show();
             
         }
+
+        private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            //if()
+        }
     }
 }
