@@ -91,5 +91,16 @@ namespace WpfProjekt.MVVM.View
                 BuyAndDownloadButton.Visibility = Visibility.Visible;
             }
         }
+
+
+        private void BuyAndDownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GamesInStoreListView.SelectedItem != null)
+            {
+                //Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
+                //session.AddGame()
+                MessageBox.Show("Zakup udany");
+            }
+        }
     }
 }

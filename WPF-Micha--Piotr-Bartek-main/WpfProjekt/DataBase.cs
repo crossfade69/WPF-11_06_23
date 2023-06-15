@@ -27,7 +27,7 @@ namespace WpfProjekt
         };
         public User Login(string login,string pass)// zwraca null w przypadku braku konta
         {
-            return users.Where(u => u.login == login).FirstOrDefault();
+            return users.Where(u => u.login == login && u.password == pass).FirstOrDefault();
         }
 
 

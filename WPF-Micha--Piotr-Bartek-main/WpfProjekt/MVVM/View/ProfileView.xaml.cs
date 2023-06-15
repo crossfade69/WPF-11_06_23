@@ -31,6 +31,62 @@ namespace WpfProjekt.MVVM.View
         {
             InitializeComponent();
             DataContext = this;
+            DisplayUserGames();
+        }
+
+
+        private void ListViewItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                GamesInStoreListView_SelectionChanged(sender, e);
+            }
+        }
+
+        private void GamesInStoreListView_SelectionChanged(object sender, MouseButtonEventArgs e)
+        {
+            if (GamesInStoreListView.SelectedItem != null)
+            {
+                isItemSelected = true;
+                DeleteGameButton.Visibility = Visibility.Visible;
+                PlayGameButton.Visibility = Visibility.Visible;
+            }
+            /*else
+            {
+                isItemSelected = false;
+                DeleteGameButton.Visibility = Visibility.Collapsed;
+                PlayGameButton.Visibility = Visibility.Collapsed;
+            }*/
+        }
+
+        private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GamesInStoreListView.SelectedItem != null)
+            {
+                 //Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
+                 //session.DeleteGame(selectedGame);
+                 GamesInStoreListView.Items.Remove(GamesInStoreListView.SelectedItem);
+             }
+        }
+
+        private void PlayGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (GamesInStoreListView.SelectedItem != null)
+            {
+                Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
+                MessageBox.Show("Uruchomienie gry: ", selectedGame.title);
+            }
+        }
+
+        private void ProfEditButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditProfWindow editWindow = new EditProfWindow();
+            editWindow.Show();
+            
+        }
+
+        public void DisplayUserGames()
+        {
             foreach (Game game in Games)
             {
                 ListViewItem listViewItem = new ListViewItem();
@@ -77,56 +133,6 @@ namespace WpfProjekt.MVVM.View
                 GamesInStoreListView.Items.Add(listViewItem);
             }
         }
-
-
-        private void ListViewItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 1)
-            {
-                GamesInStoreListView_SelectionChanged(sender, e);
-            }
-        }
-
-        private void GamesInStoreListView_SelectionChanged(object sender, MouseButtonEventArgs e)
-        {
-            if (GamesInStoreListView.SelectedItem != null)
-            {
-                isItemSelected = true;
-                DeleteGameButton.Visibility = Visibility.Visible;
-                PlayGameButton.Visibility = Visibility.Visible;
-            }
-            /*else
-            {
-                isItemSelected = false;
-                DeleteGameButton.Visibility = Visibility.Collapsed;
-                PlayGameButton.Visibility = Visibility.Collapsed;
-            }*/
-        }
-
-        private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (isItemSelected)
-             {
-                 Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
-                 Games.Remove(selectedGame);
-             }
-        }
-
-        private void PlayGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (isItemSelected)
-            {
-                Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
-            }
-        }
-
-        private void ProfEditButton_Click(object sender, RoutedEventArgs e)
-        {
-            EditProfWindow editWindow = new EditProfWindow();
-            editWindow.Show();
-            
-        }
-
         
     }
 }
