@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace WpfProjekt.MVVM.View
 {
@@ -21,7 +24,8 @@ namespace WpfProjekt.MVVM.View
     /// </summary>
     public partial class ProfileView : UserControl
     {
-        public ObservableCollection<Game> Games = new ObservableCollection<Game>(Session.GetInstance().GetUserGames());
+        static Session session = Session.GetInstance();
+        public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>(session.GetUserGames());
         private bool isItemSelected = false;
         public ProfileView()
         {
@@ -29,39 +33,60 @@ namespace WpfProjekt.MVVM.View
             DataContext = this;
             foreach (Game game in Games)
             {
-                // Tworzenie elementów XAML dla poszczególnych atrybutów Game
-                Image image = new Image();
-                image.Source = game.image;
-                image.Width = 100;
-                image.Height = 100;
+                // Tworzenie nowego wiersza
+                ListViewItem listViewItem = new ListViewItem();
 
-                TextBlock nameTextBlock = new TextBlock();
-                nameTextBlock.Text = game.title;
+                // Tworzenie GridView
+                GridView gridView = new GridView();
 
-                TextBlock categoryTextBlock = new TextBlock();
-                categoryTextBlock.Text = game.category.ToString();
+                // Tworzenie kolumny dla obrazka
+                GridViewColumn imageColumn = new GridViewColumn();
+                imageColumn.Header = "Image";
+                imageColumn.Width = 150;
 
-                TextBlock ratingTextBlock = new TextBlock();
-                ratingTextBlock.Text = game.rating.ToString();
+                // Definicja szablonu dla komórki obrazka
+                DataTemplate imageCellTemplate = new DataTemplate();
+                FrameworkElementFactory imageFactory = new FrameworkElementFactory(typeof(Image));
+                imageFactory.SetValue(Image.SourceProperty, new Binding("image"));
+                imageFactory.SetValue(Image.WidthProperty, 100.0);
+                imageFactory.SetValue(Image.HeightProperty, 100.0);
+                imageCellTemplate.VisualTree = imageFactory;
 
-                // Tworzenie elementu ListViewItem
-                ListViewItem item = new ListViewItem();
+                // Ustawienie szablonu dla komórki obrazka
+                imageColumn.CellTemplate = imageCellTemplate;
 
-                // Tworzenie StackPanel i ustawianie orientacji
-                StackPanel stackPanel = new StackPanel();
-                stackPanel.Orientation = Orientation.Horizontal;
+                // Tworzenie kolumny dla tytułu
+                GridViewColumn titleColumn = new GridViewColumn();
+                titleColumn.DisplayMemberBinding = new Binding("title");
+                titleColumn.Header = "Title";
+                titleColumn.Width = 100;
 
-                // Dodawanie elementów XAML do StackPanel
-                stackPanel.Children.Add(image);
-                stackPanel.Children.Add(nameTextBlock);
-                stackPanel.Children.Add(categoryTextBlock);
-                stackPanel.Children.Add(ratingTextBlock);
+                // Tworzenie kolumny dla kategorii
+                GridViewColumn categoryColumn = new GridViewColumn();
+                categoryColumn.DisplayMemberBinding = new Binding("category");
+                categoryColumn.Header = "Category";
+                categoryColumn.Width = 100;
 
-                // Ustawianie StackPanel jako zawartość elementu ListViewItem
-                item.Content = stackPanel;
+                // Tworzenie kolumny dla oceny
+                GridViewColumn ratingColumn = new GridViewColumn();
+                ratingColumn.DisplayMemberBinding = new Binding("rating");
+                ratingColumn.Header = "Rating";
+                ratingColumn.Width = 200;
 
-                // Dodawanie elementu ListViewItem do ListView
-                GamesInStoreListView.Items.Add(item);
+                // Dodawanie kolumn do GridView
+                gridView.Columns.Add(imageColumn);
+                gridView.Columns.Add(titleColumn);
+                gridView.Columns.Add(categoryColumn);
+                gridView.Columns.Add(ratingColumn);
+
+                // Ustawianie GridView jako widok dla ListView
+                GamesInStoreListView.View = gridView;
+
+                // Ustawianie danych dla wiersza
+                listViewItem.Content = game;
+
+                // Dodawanie wiersza do GamesInStoreListView
+                GamesInStoreListView.Items.Add(listViewItem);
             }
         }
 
