@@ -5,30 +5,24 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfProjekt.MVVM.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="560" Width="755"
       >
 
     <Grid>
-        <!-- Profile Picture 
-        <Image Source="profile_picture.jpg" Width="100" Height="100" HorizontalAlignment="Left" Margin="20" />-->
+        
 
-        <!-- Profile Information -->
-        <!-- Username -->
-        <TextBlock Text="Username" FontSize="20" FontWeight="Bold" Foreground="White" Margin="36,30,495,388" />
-        <TextBlock Text="Level: 50" Foreground="White" Margin="36,62,711,367" />
-        <Button x:Name="ProfEditButton" Content="Edit" Width="76" Height="33" Click="ProfEditButton_Click" HorizontalAlignment="Right" Margin="0,41,38,376"/>
-        <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et &#xA; lacinia leo commodo nec." Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0,0.5" Margin="36,88,38,328" />
-        <Button x:Name="PlayGameButton" Content="Play" Width="76" Height="33" Click="ProfEditButton_Click" Margin="581,127,143,290"  />
-        <Button x:Name="DeleteGameButton" Content="Delete" Width="76" Height="33" Click="ProfEditButton_Click" Margin="688,127,36,290"  />
+            <TextBlock  Text="Username" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Top" Margin="36,30,143,393" />
+            <TextBlock Text="Level: 50" Foreground="White" VerticalAlignment="Top" Margin="36,62,143,362" />
+            <Button x:Name="ProfEditButton" Content="Edit" Width="78" Click="ProfEditButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,43,0" Height="37"/>
+            <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et lacinia leo commodo nec." VerticalAlignment="Top" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0,0.5" Margin="36,88,38,433" />
 
-        <!-- Level -->
-
-        <!-- Description -->
-
-        <!-- Games Played -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,127,36,400">
+            <Button x:Name="PlayGameButton" Content="Play" Width="76" Height="33" Click="ProfEditButton_Click" />
+            <Button x:Name="DeleteGameButton" Content="Delete" Width="80" Click="ProfEditButton_Click" Margin="8,0,0,0" Height="34" />
+        </StackPanel>
 
 
-        <ListView Name="GamesInStoreListView"  Background="#FF232323" Foreground="White" Margin="36,165,36,30">
+        <ListView Name="GamesInStoreListView"  Background="#FF232323" Foreground="White" Margin="36,167,36,30">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
