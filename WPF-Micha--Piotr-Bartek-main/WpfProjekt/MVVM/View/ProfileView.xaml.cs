@@ -72,12 +72,22 @@ namespace WpfProjekt.MVVM.View
                 GamesInStoreListView.View = gridView;
 
                 listViewItem.Content = game;
+                listViewItem.MouseUp += ListViewItemMouseDoubleClick;
 
                 GamesInStoreListView.Items.Add(listViewItem);
             }
         }
 
-        private void GamesInStoreListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void ListViewItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                GamesInStoreListView_SelectionChanged(sender, e);
+            }
+        }
+
+        private void GamesInStoreListView_SelectionChanged(object sender, MouseButtonEventArgs e)
         {
             if (GamesInStoreListView.SelectedItem != null)
             {
@@ -85,12 +95,12 @@ namespace WpfProjekt.MVVM.View
                 DeleteGameButton.Visibility = Visibility.Visible;
                 PlayGameButton.Visibility = Visibility.Visible;
             }
-            else
+            /*else
             {
                 isItemSelected = false;
                 DeleteGameButton.Visibility = Visibility.Collapsed;
                 PlayGameButton.Visibility = Visibility.Collapsed;
-            }
+            }*/
         }
 
         private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
