@@ -17,8 +17,8 @@
             <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et lacinia leo commodo nec." VerticalAlignment="Top" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0,0.5" Margin="36,88,38,433" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,127,36,400">
-            <Button x:Name="PlayGameButton" Content="Play" Width="76" Height="33" Click="ProfEditButton_Click" />
-            <Button x:Name="DeleteGameButton" Content="Delete" Width="80" Click="ProfEditButton_Click" Margin="8,0,0,0" Height="34" />
+            <Button x:Name="PlayGameButton" Content="Play" Width="76" Height="33" Click="PlayGameButton_Click" />
+            <Button x:Name="DeleteGameButton" Content="Delete" Width="80" Click="DeleteGameButton_Click" Margin="8,0,0,0" Height="34" />
         </StackPanel>
 
 

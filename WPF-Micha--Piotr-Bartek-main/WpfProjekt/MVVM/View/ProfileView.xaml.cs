@@ -22,7 +22,7 @@ namespace WpfProjekt.MVVM.View
     public partial class ProfileView : UserControl
     {
         public ObservableCollection<Game> Games = new ObservableCollection<Game>(Session.GetInstance().GetUserGames());
-
+        private bool isItemSelected = false;
         public ProfileView()
         {
             InitializeComponent();
@@ -65,6 +65,46 @@ namespace WpfProjekt.MVVM.View
             }
         }
 
+        private void GamesInStoreListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Check if an item is selected
+            if (GamesInStoreListView.SelectedItem != null)
+            {
+                isItemSelected = true;
+                DeleteGameButton.Visibility = Visibility.Visible;
+                PlayGameButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                isItemSelected = false;
+                DeleteGameButton.Visibility = Visibility.Collapsed;
+                PlayGameButton.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle delete button click
+            if (isItemSelected)
+             {
+                 // Delete the selected game
+                 Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
+                 Games.Remove(selectedGame);
+                 // Additional logic if needed
+             }
+        }
+
+        private void PlayGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Handle play button click
+            if (isItemSelected)
+            {
+                // Play the selected game
+                Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
+                // Additional logic if needed
+            }
+        }
+
         private void ProfEditButton_Click(object sender, RoutedEventArgs e)
         {
             EditProfWindow editWindow = new EditProfWindow();
@@ -72,9 +112,6 @@ namespace WpfProjekt.MVVM.View
             
         }
 
-        private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
-        {
-            //if()
-        }
+        
     }
 }
