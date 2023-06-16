@@ -22,7 +22,7 @@
         </StackPanel>
 
 
-        <ListView Name="GamesInStoreListView" Background="#FF232323" Margin="36,167,36,30" Foreground="#FF8C8C8C">
+        <ListView Name="GamesInStoreListView" Margin="36,167,36,30" Background="#FF232323" Foreground="#FF8C8C8C">
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>
@@ -37,10 +37,23 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Image" Width="150"/>
-                    <GridViewColumn Header="Title" Width="100"/>
-                    <GridViewColumn Header="Category" Width="100"/>
-                    <GridViewColumn Header="Rating" Width="200"/>
+                    <GridViewColumn Header="Id" Width="0">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding id}"  Visibility="Hidden"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Image" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding image}" Width="100" Height="100"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Title" Width="100" DisplayMemberBinding="{Binding title}"/>
+                    <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding category}"/>
+                    <GridViewColumn Header="Rating" Width="200" DisplayMemberBinding="{Binding rating}"/>
                 </GridView>
             </ListView.View>
         </ListView>
