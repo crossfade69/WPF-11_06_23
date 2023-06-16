@@ -44,18 +44,23 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
     {
         return dataBase.games;
     }
-    public List<Game> GetSortedGamesByCategory()
+
+
+    public List<Game> GetSortedGamesByCategory(bool sortCategoryAsc)
     {
-        return dataBase.games.OrderBy(c => c.category).ToList();
+        return sortCategoryAsc ? dataBase.games.OrderBy(c => c.category).ToList() : dataBase.games.OrderByDescending(c => c.category).ToList();
     }
-    public List<Game> GetSortedGamesByTitle()
+
+    public List<Game> GetSortedGamesByTitle(bool sortTitleAsc)
     {
-        return dataBase.games.OrderBy(c => c.title).ToList();
+        return sortTitleAsc ? dataBase.games.OrderBy(c => c.title).ToList() : dataBase.games.OrderByDescending(c => c.title).ToList();
     }
-    public List<Game> GetSortedGamesByRatings()
+
+    public List<Game> GetSortedGamesByRatings(bool sortRatingAsc)
     {
-        return dataBase.games.OrderBy(c => c.rating).ToList();
+        return sortRatingAsc ? dataBase.games.OrderBy(c => c.rating).ToList() : dataBase.games.OrderByDescending(c => c.rating).ToList();
     }
+
 
     //METODY DO KOLECKII
 
@@ -79,17 +84,17 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         return userGames;
             
     }
-    public List<Game> GetSortedUSerGamesByCategory()
+    public List<Game> GetSortedUSerGamesByCategory(bool sortCategoryAsc)
     {
-        return GetUserGames().OrderBy(c=>c.category).ToList(); 
+        return sortCategoryAsc ? GetUserGames().OrderBy(c=>c.category).ToList() : GetUserGames().OrderByDescending(c => c.category).ToList(); 
     }
-    public List<Game> GetSortedUSerGamesByRatings()
+    public List<Game> GetSortedUSerGamesByRatings(bool sortRatingAsc)
     {
-        return GetUserGames().OrderBy(c => c.rating).ToList();
+        return sortRatingAsc ? GetUserGames().OrderBy(c => c.rating).ToList() : GetUserGames().OrderByDescending(c => c.rating).ToList();
     }
-    public List<Game> GetSortedUSerGamesByTitle()
+    public List<Game> GetSortedUSerGamesByTitle(bool sortTitleAsc)
     {
-        return GetUserGames().OrderBy(c => c.title).ToList();
+        return sortTitleAsc ? GetUserGames().OrderBy(c => c.title).ToList() : GetUserGames().OrderByDescending(c => c.title).ToList();
     }
 
     public bool AddGame(Game newGame)
@@ -111,7 +116,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
     {
         currentUser.games.Remove(deletedGame.id);
     }
-   
 
+ 
 }
 

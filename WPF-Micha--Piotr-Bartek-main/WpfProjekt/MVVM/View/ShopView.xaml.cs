@@ -17,6 +17,8 @@ using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Data;
+using WpfProjekt.Core;
+
 
 namespace WpfProjekt.MVVM.View
 {
@@ -24,18 +26,51 @@ namespace WpfProjekt.MVVM.View
     {
 
         static Session session = Session.GetInstance();
-        public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>(session.GetAllGames());
-        public ObservableCollection<Game> FilteredGames { get; } = new ObservableCollection<Game>();
+        public List<Game> Games { get; } = new List<Game>(session.GetAllGames());
+        
+        public ICommand SortByTitleCommand { get; }
+        public ICommand SortByCategoryCommand { get; }
+        public ICommand SortByRatingCommand { get; }
+        public bool sortTitleAsc;
+        public bool sortCategoryAsc;
+        public bool sortRatingAsc;
 
         public ShopView()
         {
             InitializeComponent();
             DataContext = this;
             DisplayGamesInList(Games);
-
-
+            SortByTitleCommand = new RelayCommand(SortByTitle);
+            SortByCategoryCommand = new RelayCommand(SortByCategory);
+            SortByRatingCommand = new RelayCommand(SortByRating);
+            sortTitleAsc = true;
+            sortCategoryAsc = true;
+            sortRatingAsc = true;
         }
 
+        private void SortByTitle(object obj)
+        {
+            GamesInStoreListView.Items.Clear();
+            List<Game> sortedGames = session.GetSortedGamesByTitle(sortTitleAsc);
+            DisplayGamesInList(sortedGames);
+            sortTitleAsc = !sortTitleAsc;
+        }
+
+        private void SortByCategory(object obj)
+        {
+            GamesInStoreListView.Items.Clear();
+            List<Game> sortedGames = session.GetSortedGamesByCategory(sortCategoryAsc);
+            DisplayGamesInList(sortedGames);
+            sortCategoryAsc = !sortCategoryAsc;
+        }
+
+        private void SortByRating(object obj)
+        {
+            GamesInStoreListView.Items.Clear();
+            List<Game> sortedGames = session.GetSortedGamesByRatings(sortRatingAsc);
+            DisplayGamesInList(sortedGames);
+            sortRatingAsc = !sortRatingAsc;
+        }
         private void ListViewItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 1)
@@ -69,7 +104,7 @@ namespace WpfProjekt.MVVM.View
                 }
             }
         }
-        private void DisplayGamesInList(ObservableCollection<Game> Games)
+        private void DisplayGamesInList(List<Game> Games)
         {
             foreach (Game game in Games)
             {
@@ -83,7 +118,7 @@ namespace WpfProjekt.MVVM.View
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             string searchText = SearchTextBox.Text.ToLower();
-
+            
             if (string.IsNullOrWhiteSpace(searchText))
             {
                 GamesInStoreListView.Items.Clear();
@@ -91,8 +126,7 @@ namespace WpfProjekt.MVVM.View
                 return;
             }
 
-            FilteredGames.Clear();
-
+            List<Game> FilteredGames = new List<Game>();
             foreach (Game game in Games)
             {
                 if (game.title.ToLower().Contains(searchText))

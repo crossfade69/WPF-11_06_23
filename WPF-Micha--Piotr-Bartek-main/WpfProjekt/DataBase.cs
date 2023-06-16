@@ -13,11 +13,12 @@ namespace WpfProjekt
         public static string dir = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString();
         public List<Game> games = new List<Game>()
         {
-            
-            
+
             new Game("Mario",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.8f),
             new Game("Mario2",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.7f),
             new Game("Smash bros",CategoryEnum.fighting,dir+@"\Images\default_user.png",4.7f),
+            new Game("Dying Light",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.6f),
+
         };
         //KONTA MUSZĄ BYĆ UNIKALNE
         public List<User> users { get; set; }=new List<User>() {

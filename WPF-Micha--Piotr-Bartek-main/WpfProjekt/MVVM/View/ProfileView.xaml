@@ -53,9 +53,36 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="Title" Width="100" DisplayMemberBinding="{Binding title}"/>
-                    <GridViewColumn Header="Category" Width="100" DisplayMemberBinding="{Binding category}"/>
-                    <GridViewColumn Header="Rating" Width="200" DisplayMemberBinding="{Binding rating}"/>
+                    <GridViewColumn Header="Title" Width="100">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Command" Value="{Binding SortByTitleCommand}"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.DisplayMemberBinding>
+                            <Binding Path="title"/>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Category" Width="100">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Command" Value="{Binding SortByCategoryCommand}"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.DisplayMemberBinding>
+                            <Binding Path="category"/>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Rating" Width="200">
+                        <GridViewColumn.HeaderContainerStyle>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="Command" Value="{Binding SortByRatingCommand}"/>
+                            </Style>
+                        </GridViewColumn.HeaderContainerStyle>
+                        <GridViewColumn.DisplayMemberBinding>
+                            <Binding Path="rating"/>
+                        </GridViewColumn.DisplayMemberBinding>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
