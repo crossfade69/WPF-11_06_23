@@ -57,16 +57,24 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border BorderThickness="2">
-                
+
+
             </Border>
 
-            <TextBlock Text="Elysian"
+            <TextBlock Name="Logo" Text="Elysian"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
                     Foreground="White"
                     FontSize="22"
                     Margin="20,0,0,0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  Width="120">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Width="161" Margin="759,0,0,0">
+                
+                <!-- Admin button -->
+                <Button
+                    Width="30" Height="30"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource WindowButtonStyle}"
+                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="5,5,5,5" Padding="10,9,10,10" />
 
                 <!-- Minimize button -->
                 <Button
@@ -101,6 +109,9 @@
                                 Stroke="White"
                                 StrokeThickness="2"/>
                 </Button>
+
+
+
             </StackPanel>
 
             <StackPanel Grid.Row="1"  HorizontalAlignment="Left"

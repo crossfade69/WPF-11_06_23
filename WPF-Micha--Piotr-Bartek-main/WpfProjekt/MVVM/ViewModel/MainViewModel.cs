@@ -16,7 +16,6 @@ namespace WpfProjekt.MVVM.ViewModel
         public RelayCommand GameViewCommand { get; set; }
 
 
-
         public HomeViewModel HomeVM { get; set; }
         public DiscoveryVModel DisVM { get; set; }
         public ShopViewModel ShopVM { get; set; }
@@ -67,6 +66,8 @@ namespace WpfProjekt.MVVM.ViewModel
             {
                 CurrentView = GameVM;
             });
+
+            
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfProjekt.MVVM.View;
 
 namespace WpfProjekt
 {
@@ -51,7 +52,11 @@ namespace WpfProjekt
             WindowState = WindowState.Minimized;
         }
 
-
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
+        {
+            AdminWindow adminWindow = new AdminWindow();
+            adminWindow.Show();
+        }
 
         private void WindowDrag(object sender, MouseButtonEventArgs e)
         {
