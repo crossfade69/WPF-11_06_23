@@ -63,10 +63,12 @@ namespace WpfProjekt.MVVM.View
         {
             if (GamesInStoreListView.SelectedItem != null)
             {
-                 //Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
-                 //session.DeleteGame(selectedGame);
-                 GamesInStoreListView.Items.Remove(GamesInStoreListView.SelectedItem);
-                MessageBox.Show("Gra została usunieta z biblioteki");
+                ListViewItem selectedItem = (ListViewItem)GamesInStoreListView.SelectedItem;
+                Game selectedGame = (Game)selectedItem.Content;
+                string selectedGameTitle = selectedGame.title;
+                session.DeleteGame(selectedGame);
+                GamesInStoreListView.Items.Remove(selectedItem);
+                MessageBox.Show("Gra " + selectedGameTitle + " została usunieta z biblioteki");
             }
         }
 
@@ -74,8 +76,10 @@ namespace WpfProjekt.MVVM.View
         {
             if (GamesInStoreListView.SelectedItem != null)
             {
-                //Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
-                MessageBox.Show("Uruchomienie gry");
+                ListViewItem selectedItem = (ListViewItem)GamesInStoreListView.SelectedItem;
+                Game selectedGame = (Game)selectedItem.Content;
+                string selectedGameTitle = selectedGame.title;
+                MessageBox.Show("Uruchomienie gry: " + selectedGameTitle);
             }
         }
 

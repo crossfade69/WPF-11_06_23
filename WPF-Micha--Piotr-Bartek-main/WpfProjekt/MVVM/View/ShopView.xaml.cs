@@ -56,9 +56,11 @@ namespace WpfProjekt.MVVM.View
         {
             if (GamesInStoreListView.SelectedItem != null)
             {
-                //Game selectedGame = (Game)GamesInStoreListView.SelectedItem;
-                //session.AddGame()
-                MessageBox.Show("Zakup udany");
+                ListViewItem selectedItem = (ListViewItem)GamesInStoreListView.SelectedItem;
+                Game selectedGame = (Game)selectedItem.Content;
+                string selectedGameTitle = selectedGame.title;
+                session.AddGame(selectedGame);
+                MessageBox.Show("Zakup udany gry: " + selectedGameTitle);
             }
         }
         private void DisplayGamesInList()
