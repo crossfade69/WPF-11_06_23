@@ -25,12 +25,13 @@ namespace WpfProjekt.MVVM.View
 
         static Session session = Session.GetInstance();
         public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>(session.GetAllGames());
+        public ObservableCollection<Game> FilteredGames { get; } = new ObservableCollection<Game>();
 
         public ShopView()
         {
             InitializeComponent();
             DataContext = this;
-            DisplayGamesInList();
+            DisplayGamesInList(Games);
 
 
         }
@@ -63,18 +64,40 @@ namespace WpfProjekt.MVVM.View
                 MessageBox.Show("Zakup udany gry: " + selectedGameTitle);
             }
         }
-        private void DisplayGamesInList()
+        private void DisplayGamesInList(ObservableCollection<Game> Games)
         {
             foreach (Game game in Games)
             {
                 ListViewItem listViewItem = new ListViewItem();
-
-
                 listViewItem.Content = game;
                 listViewItem.MouseUp += ListViewItemMouseDoubleClick;
-
                 GamesInStoreListView.Items.Add(listViewItem);
             }
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string searchText = SearchTextBox.Text.ToLower();
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                GamesInStoreListView.Items.Clear();
+                DisplayGamesInList(Games);
+                return;
+            }
+
+            FilteredGames.Clear();
+
+            foreach (Game game in Games)
+            {
+                if (game.title.ToLower().Contains(searchText))
+                {
+                    FilteredGames.Add(game);
+                }
+            }
+
+            GamesInStoreListView.Items.Clear();
+            DisplayGamesInList(FilteredGames);
         }
 
     }
