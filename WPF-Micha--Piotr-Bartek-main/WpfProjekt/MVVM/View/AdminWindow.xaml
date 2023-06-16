@@ -75,8 +75,8 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                <Button Margin="5" Grid.Column="0" Grid.Row="0" Content="Dodaj" Click="Dodaj_Click" Background="#FF393939" Foreground="White"/>
-                <Button Margin="5" Grid.Column="1" Grid.Row="0" Content="Usuń" Click="Usun_Click" Background="#FF393939" Foreground="White"/>
+                <!--<Button Margin="5" Grid.Column="0" Grid.Row="0" Content="Dodaj" Click="Dodaj_Click" Background="#FF393939" Foreground="White"/>
+                <Button Margin="5" Grid.Column="1" Grid.Row="0" Content="Usuń" Click="Usun_Click" Background="#FF393939" Foreground="White"/>-->
                 </Grid>
 
             </Grid>

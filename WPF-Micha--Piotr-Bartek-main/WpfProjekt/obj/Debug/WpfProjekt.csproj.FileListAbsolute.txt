@@ -178,3 +178,5 @@ C:\Users\Bartek\Source\Repos\crossfade69\WPF-11_06_23\WPF-Micha--Piotr-Bartek-ma
 C:\Users\Bartek\Source\Repos\crossfade69\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\WpfProjekt.pdb
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\EditProfWindow.g.cs
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\EditProfWindow.baml
+C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\AdminWindow.g.cs
+C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\AdminWindow.baml
