@@ -8,6 +8,7 @@
 
         mc:Ignorable="d"
         Height="600" Width="920"
+        MinHeight="300" MinWidth="620"
         WindowStyle = "None"
         ResizeMode="CanResize" 
         MouseLeftButtonDown="WindowDrag"
@@ -140,7 +141,15 @@
                     HorizontalAlignment="Stretch"
                     Content="{Binding CurrentView}" Margin="165,0,0,0" Width="755"/>
 
-            <Viewport3D Name="viewport3D1" Margin="0,364,0,0" Grid.Row="1" HorizontalAlignment="Left" Width="160">
+            <Viewport3D Name="viewport3D1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="160" Height="189" RenderTransformOrigin="0.5,0.5">
+                <Viewport3D.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="-1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Viewport3D.RenderTransform>
                 <Viewport3D.Camera>
                     <PerspectiveCamera x:Name="camMain" Position="3 2.2 2." LookDirection="-6 -5 -4">
                     </PerspectiveCamera>
