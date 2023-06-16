@@ -11,10 +11,12 @@
     <Grid>
 
 
-        <TextBlock Text="Username" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Top" Margin="36,30,143,393" />
-        <TextBlock Text="Level: 50" Foreground="White" VerticalAlignment="Top" Margin="36,62,143,362" />
+        <TextBlock Text="Username" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,28,0,0" Height="473" />
+        <TextBlock Text="Level: 50" Foreground="White"  Margin="36,60,664,30" />
         <Button x:Name="ProfEditButton" Content="Edit" Width="78" Click="ProfEditButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,43,0" Height="37"/>
-        <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et lacinia leo commodo nec." VerticalAlignment="Top" Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" RenderTransformOrigin="0,0.5" Margin="36,88,38,433" />
+        <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et lacinia leo commodo nec." 
+                   Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                   RenderTransformOrigin="0,0.5" Margin="36,88,38,30" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,127,36,400">
             <Button x:Name="PlayGameButton" Content="Play" Width="76" Height="33" Click="PlayGameButton_Click" Visibility="Hidden" />
@@ -22,7 +24,7 @@
         </StackPanel>
 
 
-        <ListView Name="GamesInStoreListView" Margin="36,167,36,30" Background="#FF232323" Foreground="#FF8C8C8C">
+        <ListView Name="GamesInStoreListView" Margin="36,167,36,30" Background="#FF232323" Foreground="#FF8C8C8C" >
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>

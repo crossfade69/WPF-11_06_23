@@ -56,10 +56,7 @@
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border BorderThickness="2">
 
-
-            </Border>
 
             <TextBlock Name="Logo" Text="Elysian"
                     VerticalAlignment="Center"
@@ -67,52 +64,52 @@
                     Foreground="White"
                     FontSize="22"
                     Margin="20,0,0,0"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left"  Width="161" Margin="759,0,0,0">
-                
-                <!-- Admin button -->
-                <Button
-                    Width="30" Height="30"
-                    VerticalAlignment="Center"
-                    Style="{StaticResource WindowButtonStyle}"
-                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="5,5,5,5" Padding="10,9,10,10" />
 
-                <!-- Minimize button -->
-                <Button
-                    Width="30" Height="20"
+            <!-- Admin button -->
+            <Button
+                    Width="30" Height="30"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Style="{StaticResource WindowButtonStyle}"
-                    Click="MinimizeButton_Click" >
-                    <Path Data="M 0,5 L 30,5"
-                        Stroke="White"
-                        StrokeThickness="2"/>
-                </Button>
-                <!-- Maximize button -->
-                <Button 
-                    Width="30" Height="20"
+                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="0,0,100,0" Padding="10,9,10,10" />
+
+            <!-- Minimize button -->
+            <Button
+                    Width="30" Height="30"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Right"
                     Style="{StaticResource WindowButtonStyle}"
-                    Click="MaximizeButton_Click">
-                    <Path Data="M 0,0 L 0,15 L 15,15 L 15,0 Z"
+                    Click="MinimizeButton_Click" Margin="0,0,60,0" >
+                <Path Data="M 0,5 L 30,5"
                         Stroke="White"
                         StrokeThickness="2"/>
-                </Button>
-                <!-- Close button -->
-                <Button
+            </Button>
+            <!-- Maximize button -->
+            <Button 
+                    Width="30" Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource WindowButtonStyle}"
+                    Click="MaximizeButton_Click" Margin="0,0,30,0">
+                <Path Data="M 0,0 L 0,15 L 15,15 L 15,0 Z"
+                        Stroke="White"
+                        StrokeThickness="2"/>
+            </Button>
+            <!-- Close button -->
+            <Button
                         VerticalAlignment="Center"
                         HorizontalAlignment="Right"
-                            Width="30" Height="20"
+                            Width="30" Height="30"
                             Style="{StaticResource WindowButtonStyle}"
-                            Click="CloseButton_Click">
-                    <Path Data="M 0,0 L 15,15 M 15,0 L 0,15"
+                            Click="CloseButton_Click" Margin="0,0,0,0">
+                <Path Data="M 0,0 L 15,15 M 15,0 L 0,15"
                                 Stroke="White"
                                 StrokeThickness="2"/>
-                </Button>
+            </Button>
 
 
 
-            </StackPanel>
+
 
             <StackPanel Grid.Row="1"  HorizontalAlignment="Left"
                         Width="160">
@@ -143,9 +140,9 @@
                     HorizontalAlignment="Stretch"
                     Content="{Binding CurrentView}" Margin="165,0,0,0" Width="755"/>
 
-            <Viewport3D Name="viewport3D1" Margin="-172,389,588,0" Grid.Row="1">
+            <Viewport3D Name="viewport3D1" Margin="0,364,0,0" Grid.Row="1" HorizontalAlignment="Left" Width="160">
                 <Viewport3D.Camera>
-                    <PerspectiveCamera x:Name="camMain" Position="6 5 4" LookDirection="-6 -5 -4">
+                    <PerspectiveCamera x:Name="camMain" Position="3 2.2 2." LookDirection="-6 -5 -4">
                     </PerspectiveCamera>
                 </Viewport3D.Camera>
                 <ModelVisual3D>
@@ -160,7 +157,15 @@
                             <GeometryModel3D.Geometry>
                                 <MeshGeometry3D x:Name="meshMain" 
                                 Positions="0 0 0  1 0 0  0 1 0  1 1 0  0 0 1  1 0 1  0 1 1  1 1 1" 
-                                TriangleIndices="2 3 1  2 1 0  7 1 3  7 5 1  6 5 7  6 4 5  6 2 0  2 0 4  2 7 3  2 6 7  0 1 5  0 5 4">                                </MeshGeometry3D>
+                                TriangleIndices="2 3 1  2 1 0  
+                                                 7 1 3  7 5 1  
+                                                 6 5 7  6 4 5  
+                                                 6 2 4  2 0 4  
+                                                 2 7 3  2 6 7  
+                                                 0 1 5  0 5 4">
+                                </MeshGeometry3D>
+                                <!---->
+
                             </GeometryModel3D.Geometry>
                             <GeometryModel3D.Material>
                                 <DiffuseMaterial x:Name="matDiffuseMain">
@@ -174,25 +179,25 @@
                     <ModelVisual3D.Transform>
                         <RotateTransform3D>
                             <RotateTransform3D.Rotation>
-                                <AxisAngleRotation3D x:Name="rotate" Axis="0 1 0"/>
+                                <AxisAngleRotation3D x:Name="rotate" Axis="1 3 2"/>
                             </RotateTransform3D.Rotation>
                         </RotateTransform3D>
                     </ModelVisual3D.Transform>
-                    
+
                 </ModelVisual3D>
                 <Viewport3D.Triggers>
-                        <EventTrigger RoutedEvent="Loaded">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation
+                    <EventTrigger RoutedEvent="Loaded">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
                             Storyboard.TargetName="rotate"
                             Storyboard.TargetProperty="Angle"
                             From="0" To="360"
                             Duration="0:0:10" 
                             RepeatBehavior="Forever"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
                 </Viewport3D.Triggers>
             </Viewport3D>
 
