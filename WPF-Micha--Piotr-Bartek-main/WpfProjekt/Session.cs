@@ -92,10 +92,19 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         return GetUserGames().OrderBy(c => c.title).ToList();
     }
 
-    public void AddGame(Game newGame)
+    public bool AddGame(Game newGame)
     {
+        int newGameId = newGame.id;
 
-        currentUser.games.Add(newGame.id);
+        foreach (int id in currentUser.games)
+        {
+            if(id == newGameId)
+            {
+                return false;
+            }
+        }
+        currentUser.games.Add(newGameId);
+        return true;
     }
 
     public void DeleteGame(Game deletedGame)
