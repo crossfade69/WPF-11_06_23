@@ -60,8 +60,11 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
             return null;
         }
 
-        string query = $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id};";
-        return QueryGames(query);
+        string query = $"SELECT * FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id};";
+        Console.WriteLine(currentUser.id);
+        List<Game> games = QueryGames(query);
+
+        return games;
     }
 
     public List<Game> GetSortedGamesByCategory(bool sortCategoryAsc)
@@ -114,6 +117,24 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         if (currentUser == null)
         {
             MessageBox.Show("Wpierw się zaloguj.");
+            return false;
+        }
+
+        // Sprawdzenie, czy użytkownik ma już posiadaną grę
+        string checkQuery = $"SELECT COUNT(*) FROM UserGames WHERE UserId = {currentUser.id} AND GameId = {newGame.id};";
+        int count = 0;
+
+        using (SQLiteCommand checkCommand = new SQLiteCommand(checkQuery, dataBase.connection))
+        {
+            object result = checkCommand.ExecuteScalar();
+            if (result != null)
+            {
+                count = Convert.ToInt32(result);
+            }
+        }
+
+        if (count > 0)
+        {
             return false;
         }
 

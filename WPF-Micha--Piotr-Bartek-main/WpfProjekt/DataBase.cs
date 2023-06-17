@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Data.Entity;
+using System.Runtime.Remoting.Messaging;
 
 namespace WpfProjekt
 {
@@ -79,7 +80,7 @@ namespace WpfProjekt
 
             string[] titles = new string[] { "Mario", "Mario2", "Smash bros", "Dying Light" };
             string[] categories = new string[] { "adventure", "adventure", "fighting", "adventure" };
-            //string[] imagesPaths = new string[] { "/Images/default_user.png", "/Images/default_user.png", "/Images/default_user.png", "/Images/default_user.png" };                                                                                     // tutaj zdjecia gier
+            //string[] imagesPaths = new string[] {  };                                                                                     // tutaj zdjecia gier
             float[] ratings = new float[] { 4.8f, 4.7f, 4.7f, 4.6f };
 
             for (int i = 0; i < titles.Length; i++)
@@ -96,7 +97,7 @@ namespace WpfProjekt
             }
 
             // Dodanie użytkownikom ich gier
-            query = "INSERT INTO UserGames (UserId, GameId) VALUES (@UserId, @GameId);";
+            /*query = "INSERT INTO UserGames (UserId, GameId) VALUES (@UserId, @GameId);";
             int[] userIds = new int[] { 0, 1, 2 };
             List<int>[] gameIds = new List<int>[] { new List<int> { 0, 1, 2 }, new List<int> { 2 }, new List<int> { 1, 2 } };
 
@@ -113,8 +114,7 @@ namespace WpfProjekt
                     }
                 }
 
-            }
-
+            }*/
         }
 
         private void ExecuteQuery(string query)
@@ -146,6 +146,7 @@ namespace WpfProjekt
                         isAdmin = reader.GetInt32(3) != 0;
                         imagePath = reader.GetString(4);
                         gameIds = GetGameIdsForUserById(id);
+                        //Console.WriteLine(id.ToString() + ":" + gameIds.ToString());
                         user = new User(id, username, password, isAdmin, gameIds, imagePath);
                     }
                 }
@@ -170,13 +171,14 @@ namespace WpfProjekt
                     }
                 }
             }
-
             return gamesIds;
         }
 
 
         public List<Game> QueryGames(string query)
         {
+            //string query1 = $"SELECT * FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = 2;";
+
             List<Game> games = new List<Game>();
 
             using (SQLiteCommand command = new SQLiteCommand(query, connection))
@@ -185,12 +187,13 @@ namespace WpfProjekt
                 {
                     while (reader.Read())
                     {
+                        int id = reader.GetInt32(0);
                         string title = reader.GetString(1);
                         CategoryEnum category = (CategoryEnum)Enum.Parse(typeof(CategoryEnum), reader.GetString(2));
                         string imagePath = reader.GetString(3);
                         float rating = (float)reader.GetDouble(4);
 
-                        Game game = new Game(title, category, imagePath, rating);
+                        Game game = new Game(id, title, category, imagePath, rating);
                         games.Add(game);
                     }
                 }
