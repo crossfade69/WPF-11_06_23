@@ -23,5 +23,27 @@ namespace WpfProjekt.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void UserGames_Click(object sender, RoutedEventArgs e)
+        {
+            AdminUserGames adminWindow2 = new AdminUserGames();
+            adminWindow2.Show();
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DisplayGamesInList(List<Game> Games)
+        {
+            foreach (Game game in Games)
+            {
+                ListViewItem listViewItem = new ListViewItem();
+                listViewItem.Content = game;
+                listViewItem.MouseUp += ListViewItemMouseDoubleClick;
+                GamesInStoreListView.Items.Add(listViewItem);
+            }
+        }
     }
 }

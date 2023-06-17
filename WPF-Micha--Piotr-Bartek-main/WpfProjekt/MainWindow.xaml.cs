@@ -52,10 +52,20 @@ namespace WpfProjekt
             WindowState = WindowState.Minimized;
         }
 
+        private void IsAdmin()
+        {
+            //if()
+            //{
+                AdminButton.Visibility = Visibility.Visible;
+
+            //}
+        }
+
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
             AdminWindow adminWindow = new AdminWindow();
             adminWindow.Show();
+           
         }
 
         private void WindowDrag(object sender, MouseButtonEventArgs e)

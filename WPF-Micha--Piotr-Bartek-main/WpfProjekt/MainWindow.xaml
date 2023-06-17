@@ -68,11 +68,13 @@
 
             <!-- Admin button -->
             <Button
-                    Width="30" Height="30"
+                Name="AdminButton"    
+                Width="30" Height="30"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Style="{StaticResource WindowButtonStyle}"
-                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="0,0,100,0" Padding="10,9,10,10" />
+                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="0,0,100,0" Padding="10,9,10,10"
+                    Visibility="Hidden"/>
 
             <!-- Minimize button -->
             <Button

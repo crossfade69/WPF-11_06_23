@@ -78,6 +78,9 @@
     <Compile Include="DataBase.cs" />
     <Compile Include="MVVM\ViewModel\AdminWindowModel.cs" />
     <Compile Include="MVVM\ViewModel\EditProfWindowModel.cs" />
+    <Compile Include="MVVM\View\AdminUserGames.xaml.cs">
+      <DependentUpon>AdminUserGames.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\View\AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
     </Compile>
     <Compile Include="Session.cs" />
     <Compile Include="User.cs" />
+    <Page Include="MVVM\View\AdminUserGames.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MVVM\View\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
