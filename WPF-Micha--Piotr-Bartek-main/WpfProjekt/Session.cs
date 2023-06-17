@@ -8,10 +8,181 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using WpfProjekt;
+using System.Data.SQLite;
+
 
 public class Session // statyczny obiekt sesji w którym znajdują się wszytkie potrzebne
                      // informacje takie jak database oraz teraźniejszy uzytkownik
 {
+
+    public User currentUser;
+    private static Session instance;
+    public DataBase dataBase;
+
+    public static Session GetInstance()
+    {
+        if (instance == null)
+            instance = new Session();
+        return instance;
+    }
+
+    private Session()
+    {
+        dataBase = new DataBase();
+    }
+
+    public bool Login(string log, string pas)
+    {
+        currentUser = dataBase.Login(log, pas);
+        if (currentUser != null)
+        {
+            return true;
+        }
+        return false;
+    }
+    private List<Game> QueryGames(string query)
+    {
+        List<Game> games = new List<Game>();
+
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            using (SQLiteDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    string title = reader.GetString(1);
+                    CategoryEnum category = (CategoryEnum)reader.GetInt32(2);
+                    string imagePath = reader.GetString(3);
+                    float rating = (float)reader.GetDouble(4);
+
+                    Game game = new Game(title, category, imagePath, rating);
+                    games.Add(game);
+                }
+            }
+        }
+
+        return games;
+    }
+
+    public List<Game> GetAllGames()
+    {
+        string query = "SELECT * FROM Games;";
+        return QueryGames(query);
+    }
+
+    public List<Game> GetUserGames()
+    {
+        if (currentUser == null)
+        {
+            MessageBox.Show("Wpierw się zaloguj.");
+            return null;
+        }
+
+        string query = $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id};";
+        return QueryGames(query);
+    }
+
+    public List<Game> GetSortedGamesByCategory(bool sortCategoryAsc)
+    {
+        string query = sortCategoryAsc ? "SELECT * FROM Games ORDER BY Category ASC;" : "SELECT * FROM Games ORDER BY Category DESC;";
+        return QueryGames(query);
+    }
+
+    public List<Game> GetSortedGamesByTitle(bool sortTitleAsc)
+    {
+        string query = sortTitleAsc ? "SELECT * FROM Games ORDER BY Title ASC;" : "SELECT * FROM Games ORDER BY Title DESC;";
+        return QueryGames(query);
+    }
+
+    public List<Game> GetSortedGamesByRatings(bool sortRatingAsc)
+    {
+        string query = sortRatingAsc ? "SELECT * FROM Games ORDER BY Rating ASC;" : "SELECT * FROM Games ORDER BY Rating DESC;";
+        return QueryGames(query);
+    }
+
+    public List<Game> GetSortedUserGamesByCategory(bool sortCategoryAsc)
+    {
+        string query = sortCategoryAsc
+            ? $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id} ORDER BY Games.Category ASC;"
+            : $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id} ORDER BY Games.Category DESC;";
+
+        return QueryGames(query);
+    }
+
+    public List<Game> GetSortedUserGamesByRatings(bool sortRatingAsc)
+    {
+        string query = sortRatingAsc
+            ? $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id} ORDER BY Games.Rating ASC;"
+            : $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id} ORDER BY Games.Rating DESC;";
+
+        return QueryGames(query);
+    }
+
+    public List<Game> GetSortedUserGamesByTitle(bool sortTitleAsc)
+    {
+        string query = sortTitleAsc
+            ? $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id} ORDER BY Games.Title ASC;"
+            : $"SELECT Games.* FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = {currentUser.id} ORDER BY Games.Title DESC;";
+
+        return QueryGames(query);
+    }
+
+    public bool AddGame(Game newGame)
+    {
+        if (currentUser == null)
+        {
+            MessageBox.Show("Wpierw się zaloguj.");
+            return false;
+        }
+
+        string query = $"INSERT INTO UserGames (UserId, GameId) VALUES ({currentUser.id}, {newGame.id});";
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.ExecuteNonQuery();
+        }
+
+        return true;
+    }
+
+    public void DeleteGame(Game deletedGame)
+    {
+        if (currentUser == null)
+        {
+            MessageBox.Show("Wpierw się zaloguj.");
+            return;
+        }
+
+        string query = $"DELETE FROM UserGames WHERE UserId = {currentUser.id} AND GameId = {deletedGame.id};";
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.ExecuteNonQuery();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public User currentUser;
     private static Session instance;
     public DataBase dataBase;
@@ -116,7 +287,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
     {
         currentUser.games.Remove(deletedGame.id);
     }
+    */
 
- 
 }
 

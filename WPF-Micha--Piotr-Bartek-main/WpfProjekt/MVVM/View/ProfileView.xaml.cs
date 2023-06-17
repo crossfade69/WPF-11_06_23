@@ -49,7 +49,7 @@ namespace WpfProjekt.MVVM.View
         private void SortByTitle(object obj)
         {
             GamesInStoreListView.Items.Clear();
-            List<Game> sortedGames = session.GetSortedUSerGamesByTitle(sortTitleAsc);
+            List<Game> sortedGames = session.GetSortedUserGamesByTitle(sortTitleAsc);
             DisplayGamesInList(sortedGames);
             sortTitleAsc = !sortTitleAsc;
         }
@@ -57,7 +57,7 @@ namespace WpfProjekt.MVVM.View
         private void SortByCategory(object obj)
         {
             GamesInStoreListView.Items.Clear();
-            List<Game> sortedGames = session.GetSortedUSerGamesByCategory(sortCategoryAsc);
+            List<Game> sortedGames = session.GetSortedUserGamesByCategory(sortCategoryAsc);
             DisplayGamesInList(sortedGames);
             sortCategoryAsc = !sortCategoryAsc;
         }
@@ -65,7 +65,7 @@ namespace WpfProjekt.MVVM.View
         private void SortByRating(object obj)
         {
             GamesInStoreListView.Items.Clear();
-            List<Game> sortedGames = session.GetSortedUSerGamesByRatings(sortRatingAsc);
+            List<Game> sortedGames = session.GetSortedUserGamesByRatings(sortRatingAsc);
             DisplayGamesInList(sortedGames);
             sortRatingAsc = !sortRatingAsc;
         }
