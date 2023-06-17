@@ -54,23 +54,66 @@ namespace WpfProjekt
         private void InsertInitialData()
         {
             //Dodanie użytkowników
-            ExecuteQuery("INSERT INTO Users (Login, Password, isAdmin, ImagePath, GameIds) VALUES ('Piotrek', 'haslo',0,'" + dir + @"\Images\default_user.png" + "');");
-            ExecuteQuery("INSERT INTO Users (Login, Password, isAdmin, ImagePath, GameIds) VALUES ('Bartek', 'Bartek',0,'" + dir + @"\Images\default_user.png" + "');");
-            ExecuteQuery("INSERT INTO Users (Login, Password, isAdmin, ImagePath, GameIds) VALUES ('Michał', 'Napiórkowski',1,'" + dir + @"\Images\default_user.png" + ");");
+
+            string imagePath = dir + @"\Images\default_user.png";
+            string query = "INSERT INTO Users (Login, Password, isAdmin, ImagePath) VALUES (@Login, @Password, @IsAdmin, @ImagePath);";
+
+            string[] logins = new string[] { "Piotrek", "Bartek", "Michał" };
+            string[] passwords = new string[] { "haslo", "Bartek", "Napiórkowski" };
+            int[] isAdmins = new int[] { 0, 0, 1 };
+
+            for (int i = 0; i < logins.Length; i++)
+            {
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Login", logins[i]);
+                    command.Parameters.AddWithValue("@Password", passwords[i]);
+                    command.Parameters.AddWithValue("@IsAdmin", isAdmins[i]);
+                    command.Parameters.AddWithValue("@ImagePath", imagePath);
+                    command.ExecuteNonQuery();
+                }
+            }
 
             //Dodanie gier
-            ExecuteQuery("INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES ('Mario', 0,'" + dir + @"\Images\default_user.png" + "', 4.8);");
-            ExecuteQuery("INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES ('Mario2', 0,'" + dir + @"\Images\default_user.png" + "', 4.7);");
-            ExecuteQuery("INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES ('Smash bros', 1,'" + dir + @"\Images\default_user.png" + "', 4.7);");
-            ExecuteQuery("INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES ('Dying Light', 0, '" + dir + @"\Images\default_user.png" + "', 4.6);");
+            query = "INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES (@Title, @Category, @ImagePath, @Rating);";
+
+            string[] titles = new string[] { "Mario", "Mario2", "Smash bros", "Dying Light" };
+            string[] categories = new string[] { "adventure", "adventure", "fighting", "adventure" };
+            //string[] imagesPaths = new string[] {  };                                                                                     // tutaj zdjecia gier
+            float[] ratings = new float[] { 4.8f, 4.7f, 4.7f, 4.6f };
+
+            for (int i = 0; i < titles.Length; i++)
+            {
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Title", titles[i]);
+                    command.Parameters.AddWithValue("@Category", categories[i]);
+                    command.Parameters.AddWithValue("@ImagePath", imagePath);
+                    //command.Parameters.AddWithValue("@IsAdmin", imagesPaths[i]);
+                    command.Parameters.AddWithValue("@Rating", ratings[i]);
+                    command.ExecuteNonQuery();
+                }
+            }
 
             // Dodanie użytkownikom ich gier
-            ExecuteQuery("INSERT INTO UserGames (UserId, GameId) VALUES (0, 0);");
-            ExecuteQuery("INSERT INTO UserGames (UserId, GameId) VALUES (0, 1);");
-            ExecuteQuery("INSERT INTO UserGames (UserId, GameId) VALUES (0, 2);");
-            ExecuteQuery("INSERT INTO UserGames (UserId, GameId) VALUES (1, 2);");
-            ExecuteQuery("INSERT INTO UserGames (UserId, GameId) VALUES (2, 1);");
-            ExecuteQuery("INSERT INTO UserGames (UserId, GameId) VALUES (2, 2);");
+            query = "INSERT INTO UserGames (UserId, GameId) VALUES (@UserId, @GameId);";
+            int[] userIds = new int[] { 0, 1, 2 };
+            List<int>[] gameIds = new List<int>[] { new List<int> { 0, 1, 2 }, new List<int> { 2 }, new List<int> { 1, 2 } };
+
+
+            for (int i = 0; i < userIds.Length; i++)
+            {
+                foreach (int gameId in gameIds[i])
+                {
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserId", userIds[i]);
+                        command.Parameters.AddWithValue("@GameId", gameId);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+            }
 
         }
 
@@ -103,7 +146,7 @@ namespace WpfProjekt
                         isAdmin = reader.GetInt32(3) != 0;
                         imagePath = reader.GetString(4);
                         gameIds = GetGameIdsForUserById(id);
-                        user = new User(id,username, password, isAdmin, gameIds, imagePath);
+                        user = new User(id, username, password, isAdmin, gameIds, imagePath);
                     }
                 }
             }
@@ -122,7 +165,7 @@ namespace WpfProjekt
                 {
                     while (reader.Read())
                     {
-                        int gameId = reader.GetInt32(2);
+                        int gameId = reader.GetInt32(0);
                         gamesIds.Add(gameId);
                     }
                 }
@@ -143,7 +186,7 @@ namespace WpfProjekt
                     while (reader.Read())
                     {
                         string title = reader.GetString(1);
-                        CategoryEnum category = (CategoryEnum)reader.GetInt32(2);
+                        CategoryEnum category = (CategoryEnum)Enum.Parse(typeof(CategoryEnum), reader.GetString(2));
                         string imagePath = reader.GetString(3);
                         float rating = (float)reader.GetDouble(4);
 
