@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using WpfProjekt;
 using System.Data.SQLite;
+using System.Data.Entity;
 
 
 public class Session // statyczny obiekt sesji w którym znajdują się wszytkie potrzebne
@@ -42,26 +43,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
     }
     private List<Game> QueryGames(string query)
     {
-        List<Game> games = new List<Game>();
-
-        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
-        {
-            using (SQLiteDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    string title = reader.GetString(1);
-                    CategoryEnum category = (CategoryEnum)reader.GetInt32(2);
-                    string imagePath = reader.GetString(3);
-                    float rating = (float)reader.GetDouble(4);
-
-                    Game game = new Game(title, category, imagePath, rating);
-                    games.Add(game);
-                }
-            }
-        }
-
-        return games;
+        return dataBase.QueryGames(query);
     }
 
     public List<Game> GetAllGames()

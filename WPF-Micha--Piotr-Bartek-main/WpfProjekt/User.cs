@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 public class User
 {
-    public static int idCount = 0;
+    //public static int idCount = 0;
     public int id { get; set; }
 
     public bool isAdmin { get; set; }
@@ -31,9 +31,24 @@ public class User
         this.password = p;
         isAdmin = isA;
         this.login = n;
-        id= idCount++;
+        //id= idCount++;
         games = gamesList;
     }
 
-    
+    public User(int id,string n, string p, bool isA, List<int> gamesList, string imageDir)
+    {
+        BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
+        newImage.BeginInit();
+        newImage.UriSource = new Uri(imageDir);
+        newImage.EndInit();
+        avatar = newImage;
+
+        this.password = p;
+        isAdmin = isA;
+        this.login = n;
+        //id= idCount++;
+        this.id = id;
+        games = gamesList;
     }
+
+}
