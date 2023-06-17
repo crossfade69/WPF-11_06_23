@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\App.xaml
-122113068713
+10415643174
 
-311501410387
+271158077489
 19860589908
-MVVM\View\AdminUserGames.xaml;MVVM\View\AdminWindow.xaml;MVVM\View\EditProfWindow.xaml;MainWindow.xaml;MVVM\View\DiscoveryV.xaml;MVVM\View\GameView.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\ProfileView.xaml;MVVM\View\ShopView.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxTheme.xaml;
+MVVM\View\AdminUserGames.xaml;MVVM\View\AdminWindow.xaml;MVVM\View\EditProfWindow.xaml;MainWindow.xaml;MVVM\View\HomeView.xaml;MVVM\View\LoginWindow.xaml;MVVM\View\ProfileView.xaml;MVVM\View\ShopView.xaml;Theme\MenuButtonTheme.xaml;Theme\TextBoxTheme.xaml;
 
-True
+False
 

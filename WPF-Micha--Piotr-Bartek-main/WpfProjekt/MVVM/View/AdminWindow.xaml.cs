@@ -37,13 +37,13 @@ namespace WpfProjekt.MVVM.View
 
         private void DisplayGamesInList(List<Game> Games)
         {
-            foreach (Game game in Games)
+            /*foreach (Game game in Games)
             {
                 ListViewItem listViewItem = new ListViewItem();
                 listViewItem.Content = game;
                 listViewItem.MouseUp += ListViewItemMouseDoubleClick;
                 GamesInStoreListView.Items.Add(listViewItem);
-            }
+            }*/
         }
     }
 }

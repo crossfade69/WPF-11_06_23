@@ -87,13 +87,9 @@
     <Compile Include="MVVM\View\EditProfWindow.xaml.cs">
       <DependentUpon>EditProfWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\ViewModel\GameViewModel.cs" />
     <Compile Include="MVVM\ViewModel\LoginWindowModel.cs" />
     <Compile Include="MVVM\ViewModel\ProfileViewModel.cs" />
     <Compile Include="MVVM\ViewModel\ShopViewModel.cs" />
-    <Compile Include="MVVM\View\GameView.xaml.cs">
-      <DependentUpon>GameView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -132,14 +128,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\View\DiscoveryV.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MVVM\View\GameView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MVVM\View\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,12 +154,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MVVM\ViewModel\DiscoveryVModel.cs" />
     <Compile Include="MVVM\ViewModel\HomeViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
-    <Compile Include="MVVM\View\DiscoveryV.xaml.cs">
-      <DependentUpon>DiscoveryV.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MVVM\View\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
@@ -211,6 +195,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\default_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\white_pad.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

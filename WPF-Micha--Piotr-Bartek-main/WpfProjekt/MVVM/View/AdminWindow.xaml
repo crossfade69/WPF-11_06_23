@@ -23,7 +23,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <Button Margin="5" Grid.Column="0" Grid.Row="0" Content="Gry" Click="Button_Click"/>
+                    <Button Margin="5" Grid.Column="0" Grid.Row="0" Content="Gry"/>
                     <Button Margin="5" Grid.Column="1" Grid.Row="0" Content="Dodaj"/>
                     <Button Margin="5" Grid.Column="2" Grid.Row="0" Content="Usuń"/>
                 </Grid>

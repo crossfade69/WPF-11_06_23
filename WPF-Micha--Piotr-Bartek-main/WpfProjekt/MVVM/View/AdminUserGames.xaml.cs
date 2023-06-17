@@ -29,10 +29,10 @@ namespace WpfProjekt.MVVM.View
 
         private void UserGamesList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (GamesInStoreListView.SelectedItem != null)
+            /*if (GamesInStoreListView.SelectedItem != null)
             {
                 DeleteGameButton.Visibility = Visibility.Visible;
-            }
+            }*/
         }
 
         private void ListViewItemMouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -56,7 +56,7 @@ namespace WpfProjekt.MVVM.View
 
         private void DeleteGameButton_Click(object sender, RoutedEventArgs e)
         {
-            if (GamesInStoreListView.SelectedItem != null)
+            /*if (GamesInStoreListView.SelectedItem != null)
             {
                 ListViewItem selectedItem = (ListViewItem)GamesInStoreListView.SelectedItem;
                 Game selectedGame = (Game)selectedItem.Content;
@@ -64,7 +64,7 @@ namespace WpfProjekt.MVVM.View
                 session.DeleteGame(selectedGame);
                 GamesInStoreListView.Items.Remove(selectedItem);
                 MessageBox.Show("Gra " + selectedGameTitle + " została usunieta z biblioteki");
-            }
+            }*/
         }
     }
 }
