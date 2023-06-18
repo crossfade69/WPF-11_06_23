@@ -10,8 +10,8 @@
 
     <Grid>
         <Grid Background="#FF2D2D2D">
-            <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,5,40" SelectionChanged="UserGamesList_SelectionChanged"/>
-            <Button Name="DeleteGameButton" Margin="679,399,5,5" Grid.Row="0" Content="Usuń" Click="DeleteGameButton_Click" Visibility="Hidden"/>
+            <ListBox Name="UserGamesListBox" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,5,0" SelectionChanged="UserGamesList_SelectionChanged" VerticalAlignment="Top" Height="394"/>
+            <Button Name="DeleteGameButton" Margin="0,0,5,5" Grid.Row="0" Content="Usuń" Click="DeleteGameButton_Click" VerticalAlignment="Bottom" HorizontalAlignment="Right" Height="30" Width="121"/>
         </Grid>
     </Grid>
 </Window>

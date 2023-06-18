@@ -46,11 +46,22 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         return dataBase.QueryGames(query);
     }
 
+    /*private List<User> QueryUsers(string query)
+    {
+        return dataBase.QueryUsers(query);
+    }*/
+
     public List<Game> GetAllGames()
     {
         string query = "SELECT * FROM Games;";
         return QueryGames(query);
     }
+
+    /*public List<User> GetAllUsers()
+    {
+        string query = "SELECT * FROM Users;";
+        return QueryUsers(query);
+    }*/
 
     public List<Game> GetUserGames()
     {

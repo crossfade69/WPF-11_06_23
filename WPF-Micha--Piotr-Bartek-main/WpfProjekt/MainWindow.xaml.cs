@@ -28,6 +28,7 @@ namespace WpfProjekt
         {
             session = Session.GetInstance();
             InitializeComponent();
+            //CheckAdmin();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -102,8 +103,16 @@ namespace WpfProjekt
         private void LoginCheck(object sender, RoutedEventArgs e)
         {
             session.Login("Michał", "Napiórkowski");
-            //MessageBox.Show(session.currentUser.login);
+            //CheckAdmin();
             
+        }
+
+        private void CheckAdmin()
+        {
+            /*if (session.isAdmin())
+            {
+                AdminButton.Visibility = Visibility.Visible;
+            }*/
         }
     }
 }
