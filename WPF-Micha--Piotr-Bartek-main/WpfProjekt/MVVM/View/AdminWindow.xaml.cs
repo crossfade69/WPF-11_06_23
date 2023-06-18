@@ -22,7 +22,7 @@ namespace WpfProjekt.MVVM.View
     {
         static Session session = Session.GetInstance();
         public List<Game> Games { get; } = new List<Game>(session.GetAllGames());
-        //public List<User> Users { get; } = new List<User>(session.GetAllUsers());
+        public List<User> Users { get; } = new List<User>(session.GetAllUsers());
         private ListBoxItem selectedGameItem;
         private ListBoxItem selectedUserItem;
 
@@ -31,12 +31,13 @@ namespace WpfProjekt.MVVM.View
         {
             InitializeComponent();
             DataContext = this;
-            catValue.Items.Insert(0,"adventure");
-            catValue.Items.Insert(1, "fighting");
-            catValue.Items.Insert(2, "FPS");
-            catValue.Items.Insert(3, "racing/racist");
+            catValue.Items.Add("adventure");
+            catValue.Items.Add("fighting");
+            catValue.Items.Add("FPS");
+            catValue.Items.Add("racing/racist");
 
             DisplayGamesInList(Games);
+            //DisplayUsersInList(Users);
         }
 
         //// GRY
@@ -59,23 +60,22 @@ namespace WpfProjekt.MVVM.View
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
-            /*Random random = new Random();
+            Random random = new Random();
             int id = random.Next();
             string title = titleValue.Text;
-            //string category = catValue.SelectedItem.ToString();
+            string category = catValue.SelectedItem?.ToString();
             string imagePath = imagepathValue.Text;
             float rating = float.Parse(ratingValue.Text);
 
-            Game newGame = new Game(id, title, category, imagePath, rating);
+            /*Game newGame = new Game(id, title, category, imagePath, rating);
             session.AddGame(newGame);
             Games.Add(newGame);
 
             ListBoxItem newGameListBoxItem = new ListBoxItem();
             newGameListBoxItem.Content = newGame;
-            newGameListBoxItem.MouseUp += ListBoxItemMouseDoubleClick;
-            GamesListBox.Items.Add(newGameListBoxItem);
+            GamesListBox.Items.Add(newGameListBoxItem);*/
 
-            ClearInputFields();*/
+            ClearInputFields();
         }
 
         private void DeleteGame_Click(object sender, RoutedEventArgs e)
@@ -83,7 +83,6 @@ namespace WpfProjekt.MVVM.View
             if (selectedGameItem != null)
             {
                 Game selectedGame = (Game)selectedGameItem.Content;
-                //session.DeleteGame(selectedGame.id);
                 Games.Remove(selectedGame);
                 GamesListBox.Items.Remove(selectedGameItem);
                 selectedGameItem = null;
@@ -122,46 +121,46 @@ namespace WpfProjekt.MVVM.View
 
         private void DisplayUsersInList(List<Game> Games)
         {
-            /*foreach (User user in Users)
+            foreach (User user in Users)
             {
                 ListBoxItem userslistBoxItem = new ListBoxItem();
-                userslistBoxItem.Content = game;
+                userslistBoxItem.Content = user;
                 UserListBox.Items.Add(userslistBoxItem);
-            }*/
+            }
         }
 
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
-            /*Random random = new Random();
-            int id = random.Next();
             string login = loginValue.Text;
             string password = passwordValue.Text;
+            bool isAdmin = isAdminValue.IsChecked ?? false; ;
             
 
-            User newUser = new User(id, login, password);
+            /*User newUser = new User(login, password, isAdmin);
             session.AddUser(newUser);
-            Users.Add(newUsers);
+            Users.Add(newUser);
 
             ListBoxItem newUserListBoxItem = new ListBoxItem();
             newUserListBoxItem.Content = newUser;
-            newUserListBoxItem.MouseUp += ListBoxItemMouseDoubleClick;
-            UsersListBox.Items.Add(newGameListBoxItem);
+            UserListBox.Items.Add(newUserListBoxItem);*/
 
-            ClearInputFields();*/
+            ClearInputFields();
         }
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
             if (selectedUserItem != null)
             {
-                /*User selectedUser = (User)selectedUserItem.Content;
-                //session.DeleteGame(selectedGame.id);
+                User selectedUser = (User)selectedUserItem.Content;
                 Users.Remove(selectedUser);
                 UserListBox.Items.Remove(selectedUserItem);
-                selectedUserItem = null;*/
+                selectedUserItem = null;
             }
         }
 
-        
+        private void isAdminValue_Checked(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

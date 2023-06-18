@@ -46,10 +46,10 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         return dataBase.QueryGames(query);
     }
 
-    /*private List<User> QueryUsers(string query)
+    private List<User> QueryUsers(string query)
     {
         return dataBase.QueryUsers(query);
-    }*/
+    }
 
     public List<Game> GetAllGames()
     {
@@ -57,11 +57,11 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         return QueryGames(query);
     }
 
-    /*public List<User> GetAllUsers()
+    public List<User> GetAllUsers()
     {
         string query = "SELECT * FROM Users;";
         return QueryUsers(query);
-    }*/
+    }
 
     public List<Game> GetUserGames()
     {
@@ -172,6 +172,47 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
             command.ExecuteNonQuery();
         }
     }
+
+    public bool AddUser(User newUser)
+    {
+        if (currentUser == null || !currentUser.isAdmin)
+        {
+            MessageBox.Show("You need to be logged in as an admin to add a user.");
+            return false;
+        }
+
+        // Check if the user already exists
+        string checkQuery = $"SELECT COUNT(*) FROM Users WHERE Login = '{newUser.login}';";
+        int count = 0;
+
+        using (SQLiteCommand checkCommand = new SQLiteCommand(checkQuery, dataBase.connection))
+        {
+            object result = checkCommand.ExecuteScalar();
+            if (result != null)
+            {
+                count = Convert.ToInt32(result);
+            }
+        }
+
+        if (count > 0)
+        {
+            MessageBox.Show("User already exists.");
+            return false;
+        }
+
+        string query = "INSERT INTO Users (Login, Password, isAdmin, ImagePath) VALUES (@Login, @Password, @IsAdmin, @ImagePath);";
+
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.Parameters.AddWithValue("@Login", newUser.login);
+            command.Parameters.AddWithValue("@Password", newUser.password);
+            command.Parameters.AddWithValue("@IsAdmin", newUser.isAdmin ? 1 : 0);
+            command.ExecuteNonQuery();
+        }
+
+        return true;
+    }
+
 
 
 

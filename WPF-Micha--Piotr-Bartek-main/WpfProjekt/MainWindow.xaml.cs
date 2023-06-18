@@ -28,7 +28,7 @@ namespace WpfProjekt
         {
             session = Session.GetInstance();
             InitializeComponent();
-            //CheckAdmin();
+            CheckAdmin();
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
@@ -53,20 +53,10 @@ namespace WpfProjekt
             WindowState = WindowState.Minimized;
         }
 
-        private void IsAdmin()
-        {
-            //if()
-            //{
-                AdminButton.Visibility = Visibility.Visible;
-
-            //}
-        }
-
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
             AdminWindow adminWindow = new AdminWindow();
             adminWindow.Show();
-           
         }
 
         private void WindowDrag(object sender, MouseButtonEventArgs e)
@@ -103,16 +93,15 @@ namespace WpfProjekt
         private void LoginCheck(object sender, RoutedEventArgs e)
         {
             session.Login("Michał", "Napiórkowski");
-            //CheckAdmin();
             
         }
 
         private void CheckAdmin()
         {
-            /*if (session.isAdmin())
+            if (session.currentUser != null && session.currentUser.isAdmin)
             {
                 AdminButton.Visibility = Visibility.Visible;
-            }*/
+            }
         }
     }
 }

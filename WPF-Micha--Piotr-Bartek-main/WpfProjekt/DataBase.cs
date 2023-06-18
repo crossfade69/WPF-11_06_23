@@ -203,7 +203,30 @@ namespace WpfProjekt
         }
 
 
-        
+        public List<User> QueryUsers(string query)
+        {
+            List<User> users = new List<User>();
+            using (SQLiteCommand command = new SQLiteCommand(query, connection))
+            {
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string username = reader.GetString(1);
+                        string password = reader.GetString(2);
+                        bool isAdmin = reader.GetInt32(3) != 0;
+                        string imagePath = reader.GetString(4);
+                        List<int> gameIds = GetGameIdsForUserById(id);
+
+                        User user = new User(id, username, password, isAdmin, gameIds, imagePath);
+                        users.Add(user);
+                    }
+                }
+            }
+
+            return users;
+        }
 
 
 
