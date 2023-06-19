@@ -96,6 +96,7 @@ namespace WpfProjekt.MVVM.View
                 newGame = new Game(id, title, category, imagePath, rating);
             } catch (UriFormatException ex)
             {
+                MessageBox.Show("Nie własciwa ścieżka do pliku zdjęcia. Ustawiono grafikę domyślną");
                 imagePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + @"\Images\default_user.png";
                 newGame = new Game(id, title, category, imagePath, rating);
             }
