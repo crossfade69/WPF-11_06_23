@@ -168,9 +168,17 @@ namespace WpfProjekt.MVVM.View
             if (selectedUserItem != null)
             {
                 User selectedUser = (User)selectedUserItem.Content;
-                Users.Remove(selectedUser);
-                UserListBox.Items.Remove(selectedUserItem);
-                selectedUserItem = null;
+                if (session.DeleteUser(selectedUser.id))
+                {
+                    Users.Remove(selectedUser);
+                    UserListBox.Items.Remove(selectedUserItem);
+                    selectedUserItem = null;
+                }
+                else
+                {
+                    MessageBox.Show("Error during deleting user");
+                }
+
             }
         }
 

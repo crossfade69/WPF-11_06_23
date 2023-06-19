@@ -11,6 +11,7 @@ using WpfProjekt;
 using System.Data.SQLite;
 using System.Data.Entity;
 using System.IO;
+using System.Data.SqlClient;
 
 public class Session // statyczny obiekt sesji w którym znajdują się wszytkie potrzebne
                      // informacje takie jak database oraz teraźniejszy uzytkownik
@@ -241,7 +242,22 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
 
 
 
-
+    public bool DeleteUser(int userId)
+    {
+        string deleteQuery = $"DELETE FROM Users WHERE Id = {userId};";
+        try
+        {
+            using (SQLiteCommand command = new SQLiteCommand(deleteQuery, dataBase.connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+        catch (SqlException ex)
+        {
+            return false;
+        }
+        return true;
+    }
 
 
 
