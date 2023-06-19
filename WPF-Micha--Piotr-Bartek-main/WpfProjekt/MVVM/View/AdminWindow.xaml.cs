@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,16 +90,33 @@ namespace WpfProjekt.MVVM.View
 
             string imagePath = imagepathValue.Text;
             float rating = float.Parse(ratingValue.Text);
+            Game newGame;
+            try
+            {
+                newGame = new Game(id, title, category, imagePath, rating);
+            } catch (UriFormatException ex)
+            {
+                imagePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + @"\Images\default_user.png";
+                newGame = new Game(id, title, category, imagePath, rating);
+            }
+            
+            int actualGameId = session.AddGameToDatabase(title,category.ToString(),imagePath,rating);
 
-            Game newGame = new Game(id, title, category, imagePath, rating);
-            session.AddGame(newGame);
-            Games.Add(newGame);
+            if (actualGameId != -1)
+            {
+                newGame.id = actualGameId;
+                Games.Add(newGame);
 
-            ListBoxItem newGameListBoxItem = new ListBoxItem();
-            newGameListBoxItem.Content = newGame;
-            GamesListBox.Items.Add(newGameListBoxItem);
+                ListBoxItem newGameListBoxItem = new ListBoxItem();
+                newGameListBoxItem.Content = newGame;
+                GamesListBox.Items.Add(newGameListBoxItem);
 
-            ClearInputFields();
+                ClearInputFields();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Id error");
+            }
         }
 
         private void DeleteGame_Click(object sender, RoutedEventArgs e)

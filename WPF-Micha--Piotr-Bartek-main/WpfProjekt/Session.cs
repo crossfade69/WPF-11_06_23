@@ -260,10 +260,35 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         return true;
     }
 
+    public int AddGameToDatabase(string title, string category, string imagePath, float rating)
+    {
+        if (currentUser == null)
+        {
+            MessageBox.Show("Wpierw się zaloguj.");
+            return -1;
+        }
+        string query = "INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES (@Title, @Category, @ImagePath, @Rating);";
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.Parameters.AddWithValue("@Title", title);
+            command.Parameters.AddWithValue("@Category", category);
+            command.Parameters.AddWithValue("@ImagePath", imagePath);
+            command.Parameters.AddWithValue("@Rating", rating);
+            command.ExecuteNonQuery();
+        }
 
+        query = "SELECT last_insert_rowid();";
 
-
-
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            object result = command.ExecuteScalar();
+            if (result != null)
+            {
+                return Convert.ToInt32(result);
+            }
+        }
+        return -1;
+    }
 
 
 
