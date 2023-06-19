@@ -80,9 +80,9 @@ namespace WpfProjekt
 
             string[] titles = new string[] { "Mario", "Mario2", "Smash bros", "Dying Light", "Cyberpunk 2077", "Witcher 3" };
             string[] categories = new string[] { "adventure", "adventure", "fighting", "adventure", "FPS", "RPG" };
-            string[] imagesPaths = new string[] { @"Images\mario.png", @"Images\mario2.png", @"Images\Smash.png", 
-                @"Images\dl.png", @"Images\cyberpunk.png", @"Images\witcher.png" };                                                                                     // tutaj zdjecia gier
-            float[] ratings = new float[] { 4.8f, 4.7f, 4.7f, 4.6f };
+            string[] imagesPaths = new string[] { dir + @"\Images\mario.png", dir + @"\Images\mario2.png", dir + @"\Images\Smash.png",
+               dir +  @"\Images\dl.png", dir + @"\Images\cyperpunk.png", dir +  @"\Images\witcher.png" };                                                                                     // tutaj zdjecia gier
+            float[] ratings = new float[] { 4.8f, 4.7f, 4.7f, 4.6f, 3.5f, 5.0f };
 
             for (int i = 0; i < titles.Length; i++)
             {

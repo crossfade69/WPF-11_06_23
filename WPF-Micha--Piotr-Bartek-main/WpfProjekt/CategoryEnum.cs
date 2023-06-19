@@ -8,6 +8,6 @@ namespace WpfProjekt
 {
     public enum CategoryEnum
     {
-        adventure,fighting,sandbox
+        adventure, fighting, sandbox, FPS, RPG
     }
 }
