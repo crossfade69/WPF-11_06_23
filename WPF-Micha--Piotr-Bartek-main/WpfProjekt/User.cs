@@ -53,4 +53,9 @@ public class User
         games = gamesList;
     }
 
+    public override string ToString()
+    {
+        return $"{this.username} ({this.login})";
+    }
+
 }

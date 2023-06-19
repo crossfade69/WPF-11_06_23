@@ -140,7 +140,7 @@ namespace WpfProjekt.MVVM.View
             foreach (User user in Users)
             {
                 ListBoxItem userslistBoxItem = new ListBoxItem();
-                userslistBoxItem.Content = $"{user.username}({user.login})";
+                userslistBoxItem.Content = user;
                 UserListBox.Items.Add(userslistBoxItem);
             }
         }
@@ -172,7 +172,7 @@ namespace WpfProjekt.MVVM.View
             }
 
             ListBoxItem newUserListBoxItem = new ListBoxItem();
-            newUserListBoxItem.Content = $"{newUser.username}({newUser.login})";
+            newUserListBoxItem.Content = newUser;
             UserListBox.Items.Add(newUserListBoxItem);
 
             ClearInputFields();

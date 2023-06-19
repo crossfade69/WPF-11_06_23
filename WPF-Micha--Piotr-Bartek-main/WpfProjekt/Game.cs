@@ -37,6 +37,11 @@ public class Game
         image = newImage;
         //image = imageDir;
     }
+
+    public override string ToString()
+    {
+        return $"{this.title}";
+    }
 }
 
 
