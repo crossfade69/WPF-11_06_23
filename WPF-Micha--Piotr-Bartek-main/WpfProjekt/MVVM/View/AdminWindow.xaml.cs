@@ -34,14 +34,30 @@ namespace WpfProjekt.MVVM.View
             catValue.Items.Add("adventure");
             catValue.Items.Add("fighting");
             catValue.Items.Add("FPS");
-            catValue.Items.Add("racing/racist");
+            catValue.Items.Add("RPG");
 
+            LoadGamesFromDatabase();
+            LoadUsersFromDatabase();
+        }
+
+        private void LoadGamesFromDatabase()
+        {
+            List<Game> games = session.GetAllGames();
+            Games.Clear();
+            Games.AddRange(games);
             DisplayGamesInList(Games);
-            //DisplayUsersInList(Users);
+        }
+
+        private void LoadUsersFromDatabase()
+        {
+            List<User> users = session.GetAllUsers();
+            Users.Clear();
+            Users.AddRange(users);
+            DisplayUsersInList(Users);
         }
 
         //// GRY
-        
+
         private void GamesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedGameItem = (ListBoxItem)GamesListBox.SelectedItem;
@@ -119,12 +135,12 @@ namespace WpfProjekt.MVVM.View
         }
 
 
-        private void DisplayUsersInList(List<Game> Games)
+        private void DisplayUsersInList(List<User> Users)
         {
             foreach (User user in Users)
             {
                 ListBoxItem userslistBoxItem = new ListBoxItem();
-                userslistBoxItem.Content = user;
+                userslistBoxItem.Content = $"{user.username}({user.login})";
                 UserListBox.Items.Add(userslistBoxItem);
             }
         }
@@ -132,13 +148,12 @@ namespace WpfProjekt.MVVM.View
         private void AddUser_Click(object sender, RoutedEventArgs e)
         {
             string login = loginValue.Text;
+            string username = usernameValue.Text;
             string password = passwordValue.Text;
             bool isAdmin = isAdminValue.IsChecked ?? false; ;
             
 
-            //User newUser = new User(login, password, isAdmin);
-            User newUser = session.AddUser(login, password, isAdmin);
-            //Users.Add(newUser);
+            User newUser = session.AddUser(login, username, password, isAdmin);
             if (newUser == null)
             {
                 if (!session.currentUser.isAdmin)
@@ -157,7 +172,7 @@ namespace WpfProjekt.MVVM.View
             }
 
             ListBoxItem newUserListBoxItem = new ListBoxItem();
-            newUserListBoxItem.Content = newUser;
+            newUserListBoxItem.Content = $"{newUser.username}({newUser.login})";
             UserListBox.Items.Add(newUserListBoxItem);
 
             ClearInputFields();

@@ -12,7 +12,7 @@ public class User
 
     public bool isAdmin { get; set; }
     public string login { get; set; }//login
-
+    public string username { get; set; }
     public string password { get; set; }//haslo
 
     public float currency { get; set; } = 0;
@@ -20,7 +20,7 @@ public class User
     public BitmapImage avatar = null;
 
     public List<int> games { get; set; }// user trzyma id do gier a nie cale obiekty
-    public User(string n,string p,bool isA,List<int> gamesList, string imageDir) 
+    public User(string n, string u, string p,bool isA,List<int> gamesList, string imageDir) 
     {
         BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
         newImage.BeginInit();
@@ -32,10 +32,11 @@ public class User
         isAdmin = isA;
         this.login = n;
         //id= idCount++;
+        this.username = u;
         games = gamesList;
     }
 
-    public User(int id,string n, string p, bool isA, List<int> gamesList, string imageDir)
+    public User(int id,string n, string u, string p, bool isA, List<int> gamesList, string imageDir)
     {
         BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
         newImage.BeginInit();
@@ -48,6 +49,7 @@ public class User
         this.login = n;
         //id= idCount++;
         this.id = id;
+        this.username = u;
         games = gamesList;
     }
 

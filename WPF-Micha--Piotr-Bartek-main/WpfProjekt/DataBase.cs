@@ -43,7 +43,7 @@ namespace WpfProjekt
             connection = new SQLiteConnection($"Data Source={databasePath};Version=3;");
             connection.Open();
 
-            string createUserTableQuery = "CREATE TABLE IF NOT EXISTS Users (Id INTEGER PRIMARY KEY AUTOINCREMENT, Login TEXT, Password TEXT, isAdmin INTEGER, ImagePath TEXT);";
+            string createUserTableQuery = "CREATE TABLE IF NOT EXISTS Users (Id INTEGER PRIMARY KEY AUTOINCREMENT, Login TEXT, Username TEXT, Password TEXT, isAdmin INTEGER, ImagePath TEXT);";
             string createGameTableQuery = "CREATE TABLE IF NOT EXISTS Games (Id INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Category INTEGER, ImagePath TEXT, Rating REAL);";
             string createGameUserTableQuery = "CREATE TABLE IF NOT EXISTS UserGames (UserId INTEGER, GameId INTEGER, FOREIGN KEY(UserId) REFERENCES Users(Id), FOREIGN KEY(GameId) REFERENCES Games(Id));";
 
@@ -57,9 +57,10 @@ namespace WpfProjekt
             //Dodanie użytkowników
 
             string imagePath = dir + @"\Images\default_user.png";
-            string query = "INSERT INTO Users (Login, Password, isAdmin, ImagePath) VALUES (@Login, @Password, @IsAdmin, @ImagePath);";
+            string query = "INSERT INTO Users (Login, Username, Password, isAdmin, ImagePath) VALUES (@Login, @Username, @Password, @IsAdmin, @ImagePath);";
 
             string[] logins = new string[] { "Piotrek", "Bartek", "Michał" };
+            string[] usernames = new string[] { "Enigma", "Vector", "Doomer" };
             string[] passwords = new string[] { "haslo", "Bartek", "Napiórkowski" };
             int[] isAdmins = new int[] { 0, 0, 1 };
 
@@ -68,6 +69,7 @@ namespace WpfProjekt
                 using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Login", logins[i]);
+                    command.Parameters.AddWithValue("@Username", usernames[i]);
                     command.Parameters.AddWithValue("@Password", passwords[i]);
                     command.Parameters.AddWithValue("@IsAdmin", isAdmins[i]);
                     command.Parameters.AddWithValue("@ImagePath", imagePath);
@@ -130,7 +132,7 @@ namespace WpfProjekt
             string query = $"SELECT * FROM Users WHERE Login = '{login}' AND Password = '{pass}';";
             User user = null;
             int id;
-            string username, password, imagePath;
+            string loginstring, username, password, imagePath;
             bool isAdmin;
             List<int> gameIds;
 
@@ -141,13 +143,14 @@ namespace WpfProjekt
                     if (reader.Read())
                     {
                         id = reader.GetInt32(0);
-                        username = reader.GetString(1);
-                        password = reader.GetString(2);
-                        isAdmin = reader.GetInt32(3) != 0;
-                        imagePath = reader.GetString(4);
+                        loginstring = reader.GetString(1);
+                        username = reader.GetString(2);
+                        password = reader.GetString(3);
+                        isAdmin = reader.GetInt32(4) != 0;
+                        imagePath = reader.GetString(5);
                         gameIds = GetGameIdsForUserById(id);
                         //Console.WriteLine(id.ToString() + ":" + gameIds.ToString());
-                        user = new User(id, username, password, isAdmin, gameIds, imagePath);
+                        user = new User(id,loginstring, username, password, isAdmin, gameIds, imagePath);
                     }
                 }
             }
@@ -213,13 +216,14 @@ namespace WpfProjekt
                     while (reader.Read())
                     {
                         int id = reader.GetInt32(0);
-                        string username = reader.GetString(1);
-                        string password = reader.GetString(2);
-                        bool isAdmin = reader.GetInt32(3) != 0;
-                        string imagePath = reader.GetString(4);
+                        string login = reader.GetString(1);
+                        string username = reader.GetString(2);
+                        string password = reader.GetString(3);
+                        bool isAdmin = reader.GetInt32(4) != 0;
+                        string imagePath = reader.GetString(5);
                         List<int> gameIds = GetGameIdsForUserById(id);
 
-                        User user = new User(id, username, password, isAdmin, gameIds, imagePath);
+                        User user = new User(id, login, username, password, isAdmin, gameIds, imagePath);
                         users.Add(user);
                     }
                 }

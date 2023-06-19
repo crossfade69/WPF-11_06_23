@@ -179,7 +179,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         }
     }
 
-    public User AddUser(string login, string password, bool isAdmin)
+    public User AddUser(string login, string username, string password, bool isAdmin)
     {
         // Check if the user already exists
         if (currentUser == null || !currentUser.isAdmin || isThereUserWithThisLogin(login))
@@ -188,11 +188,12 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         }
 
         string defaultUserImagePath = dir + @"\Images\default_user.png";
-        string query = "INSERT INTO Users (Login, Password, isAdmin, ImagePath) VALUES (@Login, @Password, @IsAdmin, @ImagePath);";
+        string query = "INSERT INTO Users (Login, Username, Password, isAdmin, ImagePath) VALUES (@Login, @Username, @Password, @IsAdmin, @ImagePath);";
         
         using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
         {
             command.Parameters.AddWithValue("@Login", login);
+            command.Parameters.AddWithValue("@Username", username);
             command.Parameters.AddWithValue("@Password", password);
             command.Parameters.AddWithValue("@IsAdmin", isAdmin ? 1 : 0);
             command.Parameters.AddWithValue("@ImagePath", defaultUserImagePath);
@@ -215,7 +216,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         }
 
         List<int> gamesList = new List<int>();
-        User newUser = new User(newUserId, login, password, isAdmin, gamesList, defaultUserImagePath);
+        User newUser = new User(newUserId, login, username, password, isAdmin, gamesList, defaultUserImagePath);
         return newUser;
     }
 
