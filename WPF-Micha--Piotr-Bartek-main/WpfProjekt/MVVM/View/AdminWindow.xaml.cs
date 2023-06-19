@@ -89,7 +89,7 @@ namespace WpfProjekt.MVVM.View
             CategoryEnum category = (CategoryEnum)Enum.Parse(typeof(CategoryEnum), kategory);
 
             string imagePath = imagepathValue.Text;
-            float rating = float.Parse(ratingValue.Text);
+            float rating = float.Parse(ratingValue.Text.Replace(",","."));
             Game newGame;
             try
             {
