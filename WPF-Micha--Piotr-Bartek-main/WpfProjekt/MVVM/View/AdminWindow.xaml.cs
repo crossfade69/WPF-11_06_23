@@ -136,13 +136,29 @@ namespace WpfProjekt.MVVM.View
             bool isAdmin = isAdminValue.IsChecked ?? false; ;
             
 
-            /*User newUser = new User(login, password, isAdmin);
-            session.AddUser(newUser);
-            Users.Add(newUser);
+            //User newUser = new User(login, password, isAdmin);
+            User newUser = session.AddUser(login, password, isAdmin);
+            //Users.Add(newUser);
+            if (newUser == null)
+            {
+                if (!session.currentUser.isAdmin)
+                {
+                    MessageBox.Show("You need to be logged in as an admin to add a user.");
+                }
+                else if (session.isThereUserWithThisLogin(login))
+                {
+                    MessageBox.Show("User already exists.");
+                }
+                else
+                {
+                    MessageBox.Show("Unknown reason for not creating new user.");
+                }
+                return;
+            }
 
             ListBoxItem newUserListBoxItem = new ListBoxItem();
             newUserListBoxItem.Content = newUser;
-            UserListBox.Items.Add(newUserListBoxItem);*/
+            UserListBox.Items.Add(newUserListBoxItem);
 
             ClearInputFields();
         }

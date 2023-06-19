@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 using WpfProjekt;
 using System.Data.SQLite;
 using System.Data.Entity;
-
+using System.IO;
 
 public class Session // statyczny obiekt sesji w którym znajdują się wszytkie potrzebne
                      // informacje takie jak database oraz teraźniejszy uzytkownik
@@ -19,6 +19,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
     public User currentUser;
     private static Session instance;
     public DataBase dataBase;
+    public static string dir = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString();
 
     public static Session GetInstance()
     {
@@ -173,16 +174,49 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         }
     }
 
-    public bool AddUser(User newUser)
+    public User AddUser(string login, string password, bool isAdmin)
     {
-        if (currentUser == null || !currentUser.isAdmin)
+        // Check if the user already exists
+        if (currentUser == null || !currentUser.isAdmin || isThereUserWithThisLogin(login))
         {
-            MessageBox.Show("You need to be logged in as an admin to add a user.");
-            return false;
+            return null;
         }
 
-        // Check if the user already exists
-        string checkQuery = $"SELECT COUNT(*) FROM Users WHERE Login = '{newUser.login}';";
+        string defaultUserImagePath = dir + @"\Images\default_user.png";
+        string query = "INSERT INTO Users (Login, Password, isAdmin, ImagePath) VALUES (@Login, @Password, @IsAdmin, @ImagePath);";
+        
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.Parameters.AddWithValue("@Login", login);
+            command.Parameters.AddWithValue("@Password", password);
+            command.Parameters.AddWithValue("@IsAdmin", isAdmin ? 1 : 0);
+            command.Parameters.AddWithValue("@ImagePath", defaultUserImagePath);
+            command.ExecuteNonQuery();  
+        }
+        int newUserId = -1;
+        // Get the ID of the newly created user
+        string getUserIdQuery = "SELECT last_insert_rowid();";
+        using (SQLiteCommand getUserIdCommand = new SQLiteCommand(getUserIdQuery, dataBase.connection))
+        {
+            object result = getUserIdCommand.ExecuteScalar();
+            if (result != null)
+            {
+                newUserId = Convert.ToInt32(result);
+            }
+        }
+        if (newUserId == -1)
+        {
+            return null;
+        }
+
+        List<int> gamesList = new List<int>();
+        User newUser = new User(newUserId, login, password, isAdmin, gamesList, defaultUserImagePath);
+        return newUser;
+    }
+
+    public bool isThereUserWithThisLogin(string login)
+    {
+        string checkQuery = $"SELECT COUNT(*) FROM Users WHERE Login = '{login}';";
         int count = 0;
 
         using (SQLiteCommand checkCommand = new SQLiteCommand(checkQuery, dataBase.connection))
@@ -196,24 +230,10 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
 
         if (count > 0)
         {
-            MessageBox.Show("User already exists.");
-            return false;
+            return true;
         }
-
-        string query = "INSERT INTO Users (Login, Password, isAdmin, ImagePath) VALUES (@Login, @Password, @IsAdmin, @ImagePath);";
-
-        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
-        {
-            command.Parameters.AddWithValue("@Login", newUser.login);
-            command.Parameters.AddWithValue("@Password", newUser.password);
-            command.Parameters.AddWithValue("@IsAdmin", newUser.isAdmin ? 1 : 0);
-            command.ExecuteNonQuery();
-        }
-
-        return true;
+        return false;
     }
-
-
 
 
 
