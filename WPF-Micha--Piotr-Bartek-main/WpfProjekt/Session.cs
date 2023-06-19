@@ -42,12 +42,10 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
         }
         return false;
     }
-
     public void Logout()
     {
         currentUser = null;
     }
-
     private List<Game> QueryGames(string query)
     {
         return dataBase.QueryGames(query);
