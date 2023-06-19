@@ -59,10 +59,10 @@ namespace WpfProjekt
             string imagePath = dir + @"\Images\default_user.png";
             string query = "INSERT INTO Users (Login, Username, Password, isAdmin, ImagePath) VALUES (@Login, @Username, @Password, @IsAdmin, @ImagePath);";
 
-            string[] logins = new string[] { "Piotrek", "Bartek", "Michał" };
-            string[] usernames = new string[] { "Enigma", "Vector", "Doomer" };
-            string[] passwords = new string[] { "haslo", "Bartek", "Napiórkowski" };
-            int[] isAdmins = new int[] { 0, 0, 1 };
+            string[] logins = new string[] { "Piotrek", "Bartek", "Michał", "admin" };
+            string[] usernames = new string[] { "Enigma", "Vector", "Doomer", "Administrator" };
+            string[] passwords = new string[] { "haslo", "Bartek", "Napiórkowski", "admin" };
+            int[] isAdmins = new int[] { 0, 0, 1, 1 };
 
             for (int i = 0; i < logins.Length; i++)
             {
