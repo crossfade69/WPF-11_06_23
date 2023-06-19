@@ -31,10 +31,13 @@ namespace WpfProjekt.MVVM.View
         {
             InitializeComponent();
             DataContext = this;
-            catValue.Items.Add("adventure");
-            catValue.Items.Add("fighting");
-            catValue.Items.Add("FPS");
-            catValue.Items.Add("RPG");
+            int i = 0;
+            foreach (CategoryEnum category in Enum.GetValues(typeof(CategoryEnum)))
+            {
+                catValue.Items.Insert(i, category);
+                i++;
+            }
+            
 
             LoadGamesFromDatabase();
             LoadUsersFromDatabase();
@@ -76,20 +79,24 @@ namespace WpfProjekt.MVVM.View
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
+            
             Random random = new Random();
             int id = random.Next();
             string title = titleValue.Text;
-            string category = catValue.SelectedItem?.ToString();
+
+            string kategory = catValue.SelectedValue.ToString();
+            CategoryEnum category = (CategoryEnum)Enum.Parse(typeof(CategoryEnum), kategory);
+
             string imagePath = imagepathValue.Text;
             float rating = float.Parse(ratingValue.Text);
 
-            /*Game newGame = new Game(id, title, category, imagePath, rating);
+            Game newGame = new Game(id, title, category, imagePath, rating);
             session.AddGame(newGame);
             Games.Add(newGame);
 
             ListBoxItem newGameListBoxItem = new ListBoxItem();
             newGameListBoxItem.Content = newGame;
-            GamesListBox.Items.Add(newGameListBoxItem);*/
+            GamesListBox.Items.Add(newGameListBoxItem);
 
             ClearInputFields();
         }
