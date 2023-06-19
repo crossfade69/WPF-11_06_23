@@ -103,5 +103,15 @@ namespace WpfProjekt
                 AdminButton.Visibility = Visibility.Visible;
             }
         }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            session.Logout();
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            Close();
+            
+        }
     }
 }

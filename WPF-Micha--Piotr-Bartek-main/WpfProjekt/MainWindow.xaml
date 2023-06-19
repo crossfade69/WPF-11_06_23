@@ -66,6 +66,18 @@
                     FontSize="22"
                     Margin="20,0,0,0"/>
 
+
+            <!-- Logout button -->
+            <Button
+                Name="LogoutButton"    
+                Width="62" Height="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource WindowButtonStyle}"
+                    Click="LogoutButton_Click" Content="Logout" FontSize="18" Margin="718,0,0,0" Padding="10,9,10,10"
+                
+                />
+
             <!-- Admin button -->
             <Button
                 Name="AdminButton"    
