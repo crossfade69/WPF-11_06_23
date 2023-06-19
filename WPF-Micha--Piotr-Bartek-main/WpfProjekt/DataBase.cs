@@ -78,9 +78,10 @@ namespace WpfProjekt
             //Dodanie gier
             query = "INSERT INTO Games (Title, Category, ImagePath, Rating) VALUES (@Title, @Category, @ImagePath, @Rating);";
 
-            string[] titles = new string[] { "Mario", "Mario2", "Smash bros", "Dying Light" };
-            string[] categories = new string[] { "adventure", "adventure", "fighting", "adventure" };
-            //string[] imagesPaths = new string[] {  };                                                                                     // tutaj zdjecia gier
+            string[] titles = new string[] { "Mario", "Mario2", "Smash bros", "Dying Light", "Cyberpunk 2077", "Witcher 3" };
+            string[] categories = new string[] { "adventure", "adventure", "fighting", "adventure", "FPS", "RPG" };
+            string[] imagesPaths = new string[] { @"Images\mario.png", @"Images\mario2.png", @"Images\Smash.png", 
+                @"Images\dl.png", @"Images\cyberpunk.png", @"Images\witcher.png" };                                                                                     // tutaj zdjecia gier
             float[] ratings = new float[] { 4.8f, 4.7f, 4.7f, 4.6f };
 
             for (int i = 0; i < titles.Length; i++)
@@ -89,8 +90,7 @@ namespace WpfProjekt
                 {
                     command.Parameters.AddWithValue("@Title", titles[i]);
                     command.Parameters.AddWithValue("@Category", categories[i]);
-                    command.Parameters.AddWithValue("@ImagePath", imagePath);
-                    //command.Parameters.AddWithValue("@IsAdmin", imagesPaths[i]);
+                    command.Parameters.AddWithValue("@ImagePath", imagesPaths[i]);
                     command.Parameters.AddWithValue("@Rating", ratings[i]);
                     command.ExecuteNonQuery();
                 }

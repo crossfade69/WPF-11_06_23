@@ -199,6 +199,21 @@
   <ItemGroup>
     <Resource Include="Images\white_pad.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\dl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Smash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\mario2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\witcher.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cyperpunk.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
