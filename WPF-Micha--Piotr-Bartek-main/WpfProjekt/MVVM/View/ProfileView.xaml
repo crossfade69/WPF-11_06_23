@@ -14,6 +14,7 @@
         <TextBlock Text="Username" FontSize="20" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="36,28,0,0" Height="473" />
         <TextBlock Text="Level: 50" Foreground="White"  Margin="36,60,664,30" />
         <Button x:Name="ProfEditButton" Content="Edit" Width="78" Click="ProfEditButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,43,0" Height="37"/>
+        <Button x:Name="PrintButton" Content="Print" Width="78"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,126,0" Height="37" Click="PrintButton_Click"/>
         <TextBlock Text="Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel turpis risus. Integer tempus augue nisi, et lacinia leo commodo nec." 
                    Foreground="White" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
                    RenderTransformOrigin="0,0.5" Margin="36,88,38,30" />

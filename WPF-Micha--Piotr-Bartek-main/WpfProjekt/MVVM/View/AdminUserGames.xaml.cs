@@ -37,8 +37,6 @@ namespace WpfProjekt.MVVM.View
             selectedGameItem = (ListBoxItem)UserGamesListBox.SelectedItem;
         }
 
-        
-
         private void DisplayGamesInList(List<Game> Games)
         {
             foreach (Game game in userGames)

@@ -97,26 +97,6 @@ namespace WpfProjekt
                     command.ExecuteNonQuery();
                 }
             }
-
-            // Dodanie użytkownikom ich gier
-            /*query = "INSERT INTO UserGames (UserId, GameId) VALUES (@UserId, @GameId);";
-            int[] userIds = new int[] { 0, 1, 2 };
-            List<int>[] gameIds = new List<int>[] { new List<int> { 0, 1, 2 }, new List<int> { 2 }, new List<int> { 1, 2 } };
-
-
-            for (int i = 0; i < userIds.Length; i++)
-            {
-                foreach (int gameId in gameIds[i])
-                {
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserId", userIds[i]);
-                        command.Parameters.AddWithValue("@GameId", gameId);
-                        command.ExecuteNonQuery();
-                    }
-                }
-
-            }*/
         }
 
         private void ExecuteQuery(string query)
@@ -158,7 +138,6 @@ namespace WpfProjekt
             return user;
         }
 
-
         private List<int> GetGameIdsForUserById(int id)
         {
             List<int> gamesIds = new List<int>();
@@ -177,13 +156,9 @@ namespace WpfProjekt
             return gamesIds;
         }
 
-
         public List<Game> QueryGames(string query)
         {
-            //string query1 = $"SELECT * FROM Games INNER JOIN UserGames ON Games.Id = UserGames.GameId WHERE UserGames.UserId = 2;";
-
             List<Game> games = new List<Game>();
-
             using (SQLiteCommand command = new SQLiteCommand(query, connection))
             {
                 using (SQLiteDataReader reader = command.ExecuteReader())
@@ -231,33 +206,5 @@ namespace WpfProjekt
 
             return users;
         }
-
-
-
-
-
-        /*
-        public static string dir = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()).ToString();
-        public List<Game> games = new List<Game>()
-        {
-
-            new Game("Mario",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.8f),
-            new Game("Mario2",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.7f),
-            new Game("Smash bros",CategoryEnum.fighting,dir+@"\Images\default_user.png",4.7f),
-            new Game("Dying Light",CategoryEnum.adventure,dir+@"\Images\default_user.png",4.6f),
-
-        };
-        //KONTA MUSZĄ BYĆ UNIKALNE
-        public List<User> users { get; set; }=new List<User>() {
-        new User("Piotrek","haslo",false,new List<int>(){ 0,1,2},dir+@"\Images\mario.png"),
-        new User("Bartek","Bartek",false,new List<int>(){ 2}, dir + @"\Images\mario.png"),
-        new User("Michał","Napiórkowski",false,new List<int>(){ 1,2}, dir + @"\Images\mario.png"),
-        };
-        public User Login(string login,string pass)// zwraca null w przypadku braku konta
-        {
-            return users.Where(u => u.login == login && u.password == pass).FirstOrDefault();
-        }*/
-
-
     }
 }

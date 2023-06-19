@@ -72,9 +72,9 @@
                 Name="LogoutButton"    
                 Width="62" Height="30"
                     VerticalAlignment="Center"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Right"
                     Style="{StaticResource WindowButtonStyle}"
-                    Click="LogoutButton_Click" Content="Logout" FontSize="18" Margin="718,0,0,0" Padding="10,9,10,10"
+                    Click="LogoutButton_Click" Content="Logout" FontSize="18" Margin="0,0,95,0" Padding="10,9,10,10"
                 
                 />
 
@@ -85,7 +85,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Style="{StaticResource WindowButtonStyle}"
-                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="0,0,100,0" Padding="10,9,10,10"
+                    Click="AdminButton_Click" Content="A" FontSize="18" Margin="0,0,160,0" Padding="10,9,10,10"
                 Visibility="Hidden"
                 />
 
@@ -222,8 +222,6 @@
                     </EventTrigger>
                 </Viewport3D.Triggers>
             </Viewport3D>
-
-
         </Grid>
     </Grid>
 

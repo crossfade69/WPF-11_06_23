@@ -118,7 +118,10 @@ namespace WpfProjekt.MVVM.View
             editWindow.Show();
             
         }
+        private void PrintButton_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
         private void DisplayGamesInList(List<Game> Games)
         {
             foreach (Game game in Games)
@@ -129,5 +132,7 @@ namespace WpfProjekt.MVVM.View
                 GamesInStoreListView.Items.Add(listViewItem);
             }
         }
+
+        
     }
 }
