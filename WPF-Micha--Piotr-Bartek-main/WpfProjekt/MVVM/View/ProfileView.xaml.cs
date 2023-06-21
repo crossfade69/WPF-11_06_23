@@ -17,6 +17,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using WpfProjekt.Core;
+//using System.Printing;
 
 namespace WpfProjekt.MVVM.View
 {
@@ -120,7 +121,15 @@ namespace WpfProjekt.MVVM.View
         }
         private void PrintButton_Click(object sender, RoutedEventArgs e)
         {
+            PrintDialog printDlg = new PrintDialog();
 
+            FlowDocument doc = new FlowDocument(new Paragraph(new Run("Name" + session.currentUser.username + "itd")));
+
+            doc.Name = "Player profile";
+
+            IDocumentPaginatorSource idpSource = doc;
+
+            printDlg.PrintDocument(idpSource.DocumentPaginator, "Player Profile Printing.");
         }
         private void DisplayGamesInList(List<Game> Games)
         {

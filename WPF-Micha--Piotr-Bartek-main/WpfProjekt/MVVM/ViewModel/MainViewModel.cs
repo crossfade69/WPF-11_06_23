@@ -28,9 +28,11 @@ namespace WpfProjekt.MVVM.ViewModel
             }
         }
 
+
         public MainViewModel() 
         {
-            HomeVM= new HomeViewModel();
+
+            HomeVM = new HomeViewModel();
             ShopVM = new ShopViewModel();
             ProfileVM = new ProfileViewModel();
 

@@ -66,6 +66,13 @@
                     FontSize="22"
                     Margin="20,0,0,0"/>
 
+            <TextBlock Name="Username" Text="{Binding Path=session.currentUser.username}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Foreground="White"
+                    FontSize="22"
+                    Margin="100,0,0,0"/>
+
 
             <!-- Logout button -->
             <Button
