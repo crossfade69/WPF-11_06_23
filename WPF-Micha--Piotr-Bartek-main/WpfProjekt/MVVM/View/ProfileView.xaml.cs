@@ -13,9 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows.Data;
 using WpfProjekt.Core;
 //using System.Printing;
 
@@ -27,6 +24,7 @@ namespace WpfProjekt.MVVM.View
     public partial class ProfileView : UserControl
     {
         static Session session = Session.GetInstance();
+        public User CurrentUser => session.currentUser;
         public List<Game> userGames { get; } = new List<Game>(session.GetUserGames());
         public ICommand SortByTitleCommand { get; }
         public ICommand SortByCategoryCommand { get; }
@@ -34,10 +32,14 @@ namespace WpfProjekt.MVVM.View
         public bool sortTitleAsc;
         public bool sortCategoryAsc;
         public bool sortRatingAsc;
+
         public ProfileView()
         {
             InitializeComponent();
             DataContext = this;
+
+            DisplayUsername();
+
             DisplayGamesInList(userGames);
             SortByTitleCommand = new RelayCommand(SortByTitle);
             SortByCategoryCommand = new RelayCommand(SortByCategory);
@@ -123,13 +125,28 @@ namespace WpfProjekt.MVVM.View
         {
             PrintDialog printDlg = new PrintDialog();
 
-            FlowDocument doc = new FlowDocument(new Paragraph(new Run("Name" + session.currentUser.username + "itd")));
+            FlowDocument doc = new FlowDocument();
+            Paragraph paragraph = new Paragraph();
 
-            doc.Name = "Player profile";
+            // Print username
+            paragraph.Inlines.Add(new Run("Username: " + CurrentUser.username));
+
+            // Print game titles
+            paragraph.Inlines.Add(new Run("\nGames in Library:\n"));
+            foreach (Game game in userGames)
+            {
+                paragraph.Inlines.Add(new Run("- " + game.title + "\n"));
+            }
+
+            doc.Blocks.Add(paragraph);
+            doc.Name = "Playerprofile";
 
             IDocumentPaginatorSource idpSource = doc;
 
-            printDlg.PrintDocument(idpSource.DocumentPaginator, "Player Profile Printing.");
+            if (printDlg.ShowDialog() == true)
+            {
+                printDlg.PrintDocument(idpSource.DocumentPaginator, "Player Profile Printing.");
+            }
         }
         private void DisplayGamesInList(List<Game> Games)
         {
@@ -142,6 +159,12 @@ namespace WpfProjekt.MVVM.View
             }
         }
 
-        
+        private void DisplayUsername()
+        {
+            if (CurrentUser != null)
+            {
+                UsernameLabel.Content = CurrentUser.username;
+            }
+        }
     }
 }
