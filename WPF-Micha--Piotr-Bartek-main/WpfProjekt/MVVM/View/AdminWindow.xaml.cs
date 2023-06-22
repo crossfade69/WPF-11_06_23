@@ -123,11 +123,6 @@ namespace WpfProjekt.MVVM.View
                 newGame.id = actualGameId;
                 Games.Add(newGame);
 
-                ListBoxItem newGameListBoxItem = new ListBoxItem();
-                newGameListBoxItem.DataContext = newGame;
-                newGameListBoxItem.Content = newGame.DisplayTitle;
-                GamesListBox.Items.Add(newGameListBoxItem);
-
                 ClearInputFields();
             }
             else
@@ -142,7 +137,6 @@ namespace WpfProjekt.MVVM.View
             {
                 Game selectedGame = (Game)GamesListBox.SelectedItem;
                 Games.Remove(selectedGame);
-                GamesListBox.Items.Remove(GamesListBox.SelectedItem);
                 previousSelectedGame = null;
             }
         }
@@ -225,12 +219,7 @@ namespace WpfProjekt.MVVM.View
                 }
                 return;
             }
-
-            ListBoxItem newUserListBoxItem = new ListBoxItem();
-            newUserListBoxItem.DataContext = newUser;
-            newUserListBoxItem.Content = newUser.DisplayUsernameAndLogin;
-            UserListBox.Items.Add(newUserListBoxItem);
-
+            Users.Add(newUser);
             ClearInputFields();
         }
 
@@ -242,7 +231,6 @@ namespace WpfProjekt.MVVM.View
                 if (session.DeleteUser(selectedUser.id))
                 {
                     Users.Remove(selectedUser);
-                    UserListBox.Items.Remove(UserListBox.SelectedItem);
                     previousSelectedUser = null;
                 }
                 else

@@ -25,16 +25,13 @@ namespace WpfProjekt
 
         private void InitializeDatabase()
         {
+            connection = new SQLiteConnection($"Data Source={databasePath};Version=3;");
             if (!File.Exists(databasePath))
             {
                 SQLiteConnection.CreateFile(databasePath);
                 CreateTables();
                 InsertInitialData();
-            }
-            else
-            {
-                connection = new SQLiteConnection($"Data Source={databasePath};Version=3;");
-                connection.Open();
+                connection.Close();
             }
         }
 
@@ -109,6 +106,7 @@ namespace WpfProjekt
 
         public User Login(string login, string pass)
         {
+            connection.Open();
             string query = $"SELECT * FROM Users WHERE Login = '{login}' AND Password = '{pass}';";
             User user = null;
             int id;
@@ -134,8 +132,13 @@ namespace WpfProjekt
                     }
                 }
             }
-
+            
             return user;
+        }
+
+        public void Logout()
+        {
+            connection.Close();
         }
 
         private List<int> GetGameIdsForUserById(int id)
