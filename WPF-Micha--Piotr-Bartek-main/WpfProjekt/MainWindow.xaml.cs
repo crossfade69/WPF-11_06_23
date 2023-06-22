@@ -57,6 +57,8 @@ namespace WpfProjekt
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
             AdminWindow adminWindow = new AdminWindow();
+            adminWindow.UserListBox.Items.Clear();
+            adminWindow.GamesListBox.Items.Clear();
             adminWindow.Show();
         }
 
@@ -101,12 +103,12 @@ namespace WpfProjekt
 
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             session.Logout();
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             Close();
-            
+
         }
     }
 }

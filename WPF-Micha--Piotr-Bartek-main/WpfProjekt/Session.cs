@@ -12,6 +12,7 @@ using System.Data.SQLite;
 using System.Data.Entity;
 using System.IO;
 using System.Data.SqlClient;
+using System.Windows.Media;
 
 public class Session // statyczny obiekt sesji w którym znajdują się wszytkie potrzebne
                      // informacje takie jak database oraz teraźniejszy uzytkownik
@@ -189,7 +190,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
 
         string defaultUserImagePath = dir + @"\Images\default_user.png";
         string query = "INSERT INTO Users (Login, Username, Password, isAdmin, ImagePath) VALUES (@Login, @Username, @Password, @IsAdmin, @ImagePath);";
-        
+
         using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
         {
             command.Parameters.AddWithValue("@Login", login);
@@ -197,7 +198,7 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
             command.Parameters.AddWithValue("@Password", password);
             command.Parameters.AddWithValue("@IsAdmin", isAdmin ? 1 : 0);
             command.Parameters.AddWithValue("@ImagePath", defaultUserImagePath);
-            command.ExecuteNonQuery();  
+            command.ExecuteNonQuery();
         }
         int newUserId = -1;
         // Get the ID of the newly created user
@@ -286,6 +287,43 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
             }
         }
         return -1;
+    }
+
+    public void UpdateGameInDatabase(Game game)
+    {
+        if (currentUser == null)
+        {
+            MessageBox.Show("Wpierw się zaloguj.");
+            return;
+        }
+        string query = "UPDATE Games SET Title = @Title, Category = @Category, ImagePath = @ImagePath, Rating = @Rating WHERE ID = @ID;";
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.Parameters.AddWithValue("@Title", game.title);
+            command.Parameters.AddWithValue("@Category", game.category);
+            command.Parameters.AddWithValue("@ImagePath", game.imageDir);
+            command.Parameters.AddWithValue("@Rating", game.rating);
+            command.Parameters.AddWithValue("@ID", game.id);
+        }
+    }
+
+    public void UpdateUserInDatabase(User user)
+    {
+        if (currentUser == null)
+        {
+            MessageBox.Show("Wpierw się zaloguj.");
+            return;
+        }
+        string query = "UPDATE Users SET Login = @Login, Username = @Username, Password = @Password, isAdmin = @IsAdmin, ImagePath = @ImagePath WHERE ID = @ID;";
+        using (SQLiteCommand command = new SQLiteCommand(query, dataBase.connection))
+        {
+            command.Parameters.AddWithValue("@Login", user.login);
+            command.Parameters.AddWithValue("@Username", user.username);
+            command.Parameters.AddWithValue("@Password", user.password);
+            command.Parameters.AddWithValue("@IsAdmin", user.isAdmin);
+            command.Parameters.AddWithValue("@ImagePath", user.imageDir);
+            command.Parameters.AddWithValue("@ID", user.id);
+        }
     }
 }
 

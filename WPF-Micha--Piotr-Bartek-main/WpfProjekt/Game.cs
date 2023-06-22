@@ -11,10 +11,15 @@ using WpfProjekt;
 /// 
 ///  imageTest.Source = session.dataBase.games.FirstOrDefault().image;
 
-public class Game
+public class Game : INotifyPropertyChanged
 {
     //public static int idCount = 0; //kazda ma odzielne id
-    public string title { get; set; }
+    private string _title;
+    public string title
+    {
+        get { return _title; }
+        set { _title = value; OnPropertyChanged("DisplayTitle"); }
+    }
     public int id { get; set; }
     public float rating { get; set; } // ocena od 1 do 5
     public int votes { get; set; } = 1;//jak wiele osob glosowalo
@@ -23,7 +28,7 @@ public class Game
     //public string image;
     public CategoryEnum category { get; set; }// typy gier są w enumie dla ułatwienia nam wpisywania
 
-    public Game(int id, string n, CategoryEnum cat, string imageDir, float rat) 
+    public Game(int id, string n, CategoryEnum cat, string imageDir, float rat)
     {
         this.imageDir = imageDir;
         BitmapImage newImage = new BitmapImage();//przygotowanie obrazka do wyswieltenia // nie tykac
@@ -38,7 +43,7 @@ public class Game
         {
             throw ex;
         }
-        
+
 
         this.id = id;
         title = n;
@@ -51,6 +56,23 @@ public class Game
     public override string ToString()
     {
         return $"{this.title}";
+    }
+
+    public string DisplayTitle
+    {
+        get
+        {
+            return this.title;
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    public void OnPropertyChanged(string property)
+    {
+        if (PropertyChanged != null)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
     }
 }
 

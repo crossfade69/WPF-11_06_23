@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -23,23 +24,25 @@ namespace WpfProjekt.MVVM.View
     public partial class AdminWindow : Window
     {
         static Session session = Session.GetInstance();
-        public List<Game> Games { get; } = new List<Game>(session.GetAllGames());
-        public List<User> Users { get; } = new List<User>(session.GetAllUsers());
-        private ListBoxItem selectedGameItem;
-        private ListBoxItem selectedUserItem;
 
+        public ObservableCollection<User> Users { get; } = new ObservableCollection<User>();
+        public ObservableCollection<Game> Games { get; } = new ObservableCollection<Game>();
+
+        private Game previousSelectedGame;
+        private User previousSelectedUser;
 
         public AdminWindow()
         {
             InitializeComponent();
             DataContext = this;
+            previousSelectedGame = null;
+            previousSelectedUser = null;
             int i = 0;
             foreach (CategoryEnum category in Enum.GetValues(typeof(CategoryEnum)))
             {
                 catValue.Items.Insert(i, category);
                 i++;
             }
-            
 
             LoadGamesFromDatabase();
             LoadUsersFromDatabase();
@@ -52,15 +55,17 @@ namespace WpfProjekt.MVVM.View
             Binding szczegolyGameBinding = new Binding();
             szczegolyGameBinding.Source = GamesListBox;
             szczegolyGameBinding.Path = new PropertyPath("SelectedItem");
-            szczegolyUser.SetBinding(Grid.DataContextProperty, szczegolyGameBinding);
-
+            szczegolyGame.SetBinding(Grid.DataContextProperty, szczegolyGameBinding);
         }
 
         private void LoadGamesFromDatabase()
         {
             List<Game> games = session.GetAllGames();
             Games.Clear();
-            Games.AddRange(games);
+            foreach (Game game in games)
+            {
+                Games.Add(game);
+            }
             DisplayGamesInList(Games);
         }
 
@@ -68,39 +73,28 @@ namespace WpfProjekt.MVVM.View
         {
             List<User> users = session.GetAllUsers();
             Users.Clear();
-            Users.AddRange(users);
+            foreach (User user in users)
+            {
+                Users.Add(user);
+            }
             DisplayUsersInList(Users);
         }
 
-        //// GRY
-
-        private void GamesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DisplayGamesInList(ObservableCollection<Game> Games)
         {
-            selectedGameItem = (ListBoxItem)GamesListBox.SelectedItem;
-            if (selectedGameItem != null)
-            {
-                Game selectedGame = (Game)selectedGameItem.Content;
-                titleValue.Text = selectedGame.title;
-                catValue.SelectedItem = selectedGame.category;
-                imagepathValue.Text = selectedGame.image.UriSource.AbsolutePath;
-                ratingValue.Text = selectedGame.rating.ToString();
-            }
-        }
-
-
-        private void DisplayGamesInList(List<Game> Games)
-        {
+            GamesListBox.Items.Clear();
             foreach (Game game in Games)
             {
                 ListBoxItem gameslistBoxItem = new ListBoxItem();
-                gameslistBoxItem.Content = game;
+                gameslistBoxItem.DataContext = game;
+                gameslistBoxItem.Content = game.DisplayTitle;
                 GamesListBox.Items.Add(gameslistBoxItem);
             }
         }
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
-            
+
             Random random = new Random();
             int id = random.Next();
             string title = titleValue.Text;
@@ -109,19 +103,20 @@ namespace WpfProjekt.MVVM.View
             CategoryEnum category = (CategoryEnum)Enum.Parse(typeof(CategoryEnum), kategory);
 
             string imagePath = imagepathValue.Text;
-            float rating = float.Parse(ratingValue.Text.Replace(",","."));
+            float rating = float.Parse(ratingValue.Text.Replace(",", "."));
             Game newGame;
             try
             {
                 newGame = new Game(id, title, category, imagePath, rating);
-            } catch (UriFormatException ex)
+            }
+            catch (UriFormatException ex)
             {
                 MessageBox.Show("Nie własciwa ścieżka do pliku zdjęcia. Ustawiono grafikę domyślną");
                 imagePath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + @"\Images\default_user.png";
                 newGame = new Game(id, title, category, imagePath, rating);
             }
-            
-            int actualGameId = session.AddGameToDatabase(title,category.ToString(),imagePath,rating);
+
+            int actualGameId = session.AddGameToDatabase(title, category.ToString(), imagePath, rating);
 
             if (actualGameId != -1)
             {
@@ -129,7 +124,8 @@ namespace WpfProjekt.MVVM.View
                 Games.Add(newGame);
 
                 ListBoxItem newGameListBoxItem = new ListBoxItem();
-                newGameListBoxItem.Content = newGame;
+                newGameListBoxItem.DataContext = newGame;
+                newGameListBoxItem.Content = newGame.DisplayTitle;
                 GamesListBox.Items.Add(newGameListBoxItem);
 
                 ClearInputFields();
@@ -142,12 +138,12 @@ namespace WpfProjekt.MVVM.View
 
         private void DeleteGame_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedGameItem != null)
+            if (GamesListBox.SelectedItem != null)
             {
-                Game selectedGame = (Game)selectedGameItem.Content;
+                Game selectedGame = (Game)GamesListBox.SelectedItem;
                 Games.Remove(selectedGame);
-                GamesListBox.Items.Remove(selectedGameItem);
-                selectedGameItem = null;
+                GamesListBox.Items.Remove(GamesListBox.SelectedItem);
+                previousSelectedGame = null;
             }
         }
 
@@ -159,6 +155,18 @@ namespace WpfProjekt.MVVM.View
             ratingValue.Text = string.Empty;
         }
 
+        private void GamesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (GamesListBox.SelectedItem != null)
+            {
+                if (previousSelectedGame != null)
+                {
+                    session.UpdateGameInDatabase(previousSelectedGame);
+                }
+            }
+            previousSelectedGame = (Game)GamesListBox.SelectedItem;
+        }
+
         private void catValue_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -167,30 +175,27 @@ namespace WpfProjekt.MVVM.View
 
 
         //// UŻYTKOWNICY
-        
 
-       
-
-        /*private void UserListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void UserListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedUserItem = (ListBoxItem)UserListBox.SelectedItem;
-            if (selectedUserItem != null)
+            if (UserListBox.SelectedItem != null)
             {
-                User selectedUser = (User)selectedUserItem.Content;
-                loginValue.Text = selectedUser.login;
-                passwordValue.Text = selectedUser.password;
-                usernameValue.Text = selectedUser.username;
-                isAdminValue.IsChecked = selectedUser.isAdmin;
+                if (previousSelectedUser != null)
+                {
+                    session.UpdateUserInDatabase(previousSelectedUser);
+                }
             }
-        }*/
+            previousSelectedUser = (User)UserListBox.SelectedItem;
+        }
 
 
-        private void DisplayUsersInList(List<User> Users)
+        private void DisplayUsersInList(ObservableCollection<User> Users)
         {
             foreach (User user in Users)
             {
                 ListBoxItem userslistBoxItem = new ListBoxItem();
-                userslistBoxItem.Content = user;
+                userslistBoxItem.DataContext = user;
+                userslistBoxItem.Content = user.DisplayUsernameAndLogin;
                 UserListBox.Items.Add(userslistBoxItem);
             }
         }
@@ -201,7 +206,7 @@ namespace WpfProjekt.MVVM.View
             string username = usernameValue.Text;
             string password = passwordValue.Text;
             bool isAdmin = isAdminValue.IsChecked ?? false; ;
-            
+
 
             User newUser = session.AddUser(login, username, password, isAdmin);
             if (newUser == null)
@@ -222,7 +227,8 @@ namespace WpfProjekt.MVVM.View
             }
 
             ListBoxItem newUserListBoxItem = new ListBoxItem();
-            newUserListBoxItem.Content = newUser;
+            newUserListBoxItem.DataContext = newUser;
+            newUserListBoxItem.Content = newUser.DisplayUsernameAndLogin;
             UserListBox.Items.Add(newUserListBoxItem);
 
             ClearInputFields();
@@ -230,14 +236,14 @@ namespace WpfProjekt.MVVM.View
 
         private void DeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedUserItem != null)
+            if (UserListBox.SelectedItem != null)
             {
-                User selectedUser = (User)selectedUserItem.Content;
+                    User selectedUser = (User)UserListBox.SelectedItem;
                 if (session.DeleteUser(selectedUser.id))
                 {
                     Users.Remove(selectedUser);
-                    UserListBox.Items.Remove(selectedUserItem);
-                    selectedUserItem = null;
+                    UserListBox.Items.Remove(UserListBox.SelectedItem);
+                    previousSelectedUser = null;
                 }
                 else
                 {
@@ -249,7 +255,8 @@ namespace WpfProjekt.MVVM.View
 
         private void isAdminValue_Checked(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
+

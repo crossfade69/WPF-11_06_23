@@ -130,7 +130,7 @@ namespace WpfProjekt
                         imagePath = reader.GetString(5);
                         gameIds = GetGameIdsForUserById(id);
                         //Console.WriteLine(id.ToString() + ":" + gameIds.ToString());
-                        user = new User(id,loginstring, username, password, isAdmin, gameIds, imagePath);
+                        user = new User(id, loginstring, username, password, isAdmin, gameIds, imagePath);
                     }
                 }
             }
