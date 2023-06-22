@@ -12,7 +12,7 @@
     <Grid>
 
 
-        <Label x:Name="UsernameLabel"  Content="{Binding }" Foreground="White" Margin="36,10,294,513" FontSize="16" FontWeight="Bold" />
+        <Label x:Name="UsernameLabel"  Content="{Binding CurrentUser.username}" Foreground="White" Margin="36,10,294,513" FontSize="16" FontWeight="Bold" />
         <TextBlock Text="{Binding Path=session.currentUser.isAdmin}" Foreground="White"  Margin="36,60,664,30" />
         <Button x:Name="ProfEditButton" Content="Edit" Width="78" Click="ProfEditButton_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,43,0" Height="37"/>
         <Button x:Name="PrintButton" Content="Print" Width="78"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,41,126,0" Height="37" Click="PrintButton_Click"/>

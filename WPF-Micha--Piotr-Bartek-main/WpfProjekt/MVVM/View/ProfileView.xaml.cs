@@ -38,7 +38,7 @@ namespace WpfProjekt.MVVM.View
             InitializeComponent();
             DataContext = this;
 
-            DisplayUsername();
+            DisplayCurrentUser();
 
             DisplayGamesInList(userGames);
             SortByTitleCommand = new RelayCommand(SortByTitle);
@@ -159,11 +159,11 @@ namespace WpfProjekt.MVVM.View
             }
         }
 
-        private void DisplayUsername()
+        private void DisplayCurrentUser()
         {
             if (CurrentUser != null)
             {
-                UsernameLabel.Content = CurrentUser.username;
+                UsernameLabel.Content = CurrentUser.login;
             }
         }
     }
