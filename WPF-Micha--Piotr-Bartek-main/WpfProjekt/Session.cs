@@ -202,7 +202,6 @@ public class Session // statyczny obiekt sesji w którym znajdują się wszytkie
             command.ExecuteNonQuery();
         }
         int newUserId = -1;
-        // Get the ID of the newly created user
         string getUserIdQuery = "SELECT last_insert_rowid();";
         using (SQLiteCommand getUserIdCommand = new SQLiteCommand(getUserIdQuery, dataBase.connection))
         {

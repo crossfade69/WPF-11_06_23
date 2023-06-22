@@ -87,7 +87,6 @@ namespace WpfProjekt.MVVM.View
             {
                 ListBoxItem gameslistBoxItem = new ListBoxItem();
                 gameslistBoxItem.DataContext = game;
-                gameslistBoxItem.Content = game.DisplayTitle;
                 GamesListBox.Items.Add(gameslistBoxItem);
             }
         }
@@ -189,7 +188,6 @@ namespace WpfProjekt.MVVM.View
             {
                 ListBoxItem userslistBoxItem = new ListBoxItem();
                 userslistBoxItem.DataContext = user;
-                userslistBoxItem.Content = user.DisplayUsernameAndLogin;
                 UserListBox.Items.Add(userslistBoxItem);
             }
         }
@@ -241,10 +239,6 @@ namespace WpfProjekt.MVVM.View
             }
         }
 
-        private void isAdminValue_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
 

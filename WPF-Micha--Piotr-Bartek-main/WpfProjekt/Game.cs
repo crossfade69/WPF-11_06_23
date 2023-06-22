@@ -25,7 +25,6 @@ public class Game : INotifyPropertyChanged
     public int votes { get; set; } = 1;//jak wiele osob glosowalo
     public string imageDir { get; set; }
     public BitmapImage image { get; set; }
-    //public string image;
     public CategoryEnum category { get; set; }// typy gier są w enumie dla ułatwienia nam wpisywania
 
     public Game(int id, string n, CategoryEnum cat, string imageDir, float rat)
@@ -37,7 +36,6 @@ public class Game : INotifyPropertyChanged
             newImage.BeginInit();
             newImage.UriSource = new Uri(imageDir);
             newImage.EndInit();
-            //id = idCount++;
         }
         catch (UriFormatException ex)
         {
@@ -50,7 +48,6 @@ public class Game : INotifyPropertyChanged
         category = cat;
         rating = rat;
         image = newImage;
-        //image = imageDir;
     }
 
     public override string ToString()

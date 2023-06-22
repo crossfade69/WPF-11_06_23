@@ -8,7 +8,6 @@ using System.Windows.Media.Imaging;
 
 public class User : INotifyPropertyChanged
 {
-    //public static int idCount = 0;
     public int id { get; set; }
 
     public bool isAdmin { get; set; }
@@ -44,7 +43,6 @@ public class User : INotifyPropertyChanged
         this.password = p;
         isAdmin = isA;
         this.login = n;
-        //id= idCount++;
         this.username = u;
         games = gamesList;
     }
@@ -61,7 +59,6 @@ public class User : INotifyPropertyChanged
         this.password = p;
         isAdmin = isA;
         this.login = n;
-        //id= idCount++;
         this.id = id;
         this.username = u;
         games = gamesList;

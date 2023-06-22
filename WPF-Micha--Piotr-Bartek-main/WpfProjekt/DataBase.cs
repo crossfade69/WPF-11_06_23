@@ -127,7 +127,6 @@ namespace WpfProjekt
                         isAdmin = reader.GetInt32(4) != 0;
                         imagePath = reader.GetString(5);
                         gameIds = GetGameIdsForUserById(id);
-                        //Console.WriteLine(id.ToString() + ":" + gameIds.ToString());
                         user = new User(id, loginstring, username, password, isAdmin, gameIds, imagePath);
                     }
                 }
