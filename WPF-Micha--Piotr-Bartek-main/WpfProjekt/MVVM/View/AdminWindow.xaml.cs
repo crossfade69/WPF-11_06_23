@@ -65,6 +65,14 @@ namespace WpfProjekt.MVVM.View
         private void GamesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedGameItem = (ListBoxItem)GamesListBox.SelectedItem;
+            if (selectedGameItem != null)
+            {
+                Game selectedGame = (Game)selectedGameItem.Content;
+                titleValue.Text = selectedGame.title;
+                catValue.SelectedItem = selectedGame.category;
+                imagepathValue.Text = selectedGame.image.UriSource.AbsolutePath;
+                ratingValue.Text = selectedGame.rating.ToString();
+            }
         }
 
 
@@ -158,6 +166,14 @@ namespace WpfProjekt.MVVM.View
         private void UserListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedUserItem = (ListBoxItem)UserListBox.SelectedItem;
+            if (selectedUserItem != null)
+            {
+                User selectedUser = (User)selectedUserItem.Content;
+                loginValue.Text = selectedUser.login;
+                passwordValue.Text = selectedUser.password;
+                usernameValue.Text = selectedUser.username;
+                isAdminValue.IsChecked = selectedUser.isAdmin;
+            }
         }
 
 
