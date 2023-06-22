@@ -12,20 +12,20 @@
     <Grid>
 
 
-        <Label x:Name="UsernameLabel"  Content="{Binding CurrentUser.username}" Foreground="White" Margin="36,10,294,89" FontSize="16" FontWeight="Bold" />
+        <Label x:Name="UsernameLabel"  Content="Text" Foreground="White" Margin="36,23,294,89" FontSize="64" FontWeight="Bold" />
         
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,23,36,0" Height="37" Width="164">
             <Button x:Name="ProfEditButton" Content="Edit" Width="78" Click="ProfEditButton_Click" Height="37"/>
             <Button x:Name="PrintButton" Content="Print" Width="78"  Margin="8,0,0,0" Height="37" Click="PrintButton_Click"/>
         </StackPanel>
         
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,127,36,400">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,65,36,0">
             <Button x:Name="PlayGameButton" Content="Play" Width="76" Height="33" Click="PlayGameButton_Click" Visibility="Hidden" />
             <Button x:Name="DeleteGameButton" Content="Delete" Width="80" Click="DeleteGameButton_Click" Margin="8,0,0,0" Height="34" Visibility="Hidden"/>
         </StackPanel>
 
 
-        <ListView Name="GamesInStoreListView" Margin="36,167,36,30" Background="#FF232323" Foreground="#FF8C8C8C" >
+        <ListView Name="GamesInStoreListView" Margin="36,118,36,30" Background="#FF232323" Foreground="#FF8C8C8C" >
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Style.Triggers>

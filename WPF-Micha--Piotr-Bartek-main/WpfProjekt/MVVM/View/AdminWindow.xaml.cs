@@ -169,11 +169,7 @@ namespace WpfProjekt.MVVM.View
         //// UŻYTKOWNICY
         
 
-        private void UserGames_Click(object sender, RoutedEventArgs e)
-        {
-            AdminUserGames adminWindow2 = new AdminUserGames();
-            adminWindow2.Show();
-        }
+       
 
         /*private void UserListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

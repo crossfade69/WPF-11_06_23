@@ -39,7 +39,6 @@ namespace WpfProjekt
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Udana edycja");
             session.currentUser.username = usernameValue.Text;
             session.currentUser.password = passwordValue.Text;
             session.currentUser.login = loginValue.Text;

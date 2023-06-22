@@ -176,7 +176,6 @@ C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfP
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\EditProfWindow.baml
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\AdminWindow.g.cs
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\AdminWindow.baml
-C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\AdminUserGames.g.cs
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\bin\Debug\EntityFramework.dll
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\bin\Debug\System.Data.SQLite.dll
@@ -185,5 +184,4 @@ C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfP
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\bin\Debug\EntityFramework.xml
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\bin\Debug\System.Data.SQLite.xml
-C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\MVVM\View\AdminUserGames.baml
 C:\Users\mrcro\Desktop\WpfProjekt\WPF-11_06_23\WPF-Micha--Piotr-Bartek-main\WpfProjekt\obj\Debug\WpfProjekt.csproj.CopyComplete
