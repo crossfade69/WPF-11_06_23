@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Collections.Specialized.BitVector32;
 
 namespace WpfProjekt
 {
@@ -19,19 +20,31 @@ namespace WpfProjekt
     /// </summary>
     public partial class EditProfWindow : Window
     {
+        private Session session = Session.GetInstance();
         public EditProfWindow()
         {
             InitializeComponent();
+            DisplayUserInfo();
+        }
+
+        private void DisplayUserInfo()
+        {
+            if (session.currentUser != null)
+            {
+                loginValue.Text = session.currentUser.login;
+                passwordValue.Text = session.currentUser.password;
+                usernameValue.Text = session.currentUser.username;
+            }
         }
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("Udana edycja");
+            session.currentUser.username = usernameValue.Text;
+            session.currentUser.password = passwordValue.Text;
+            session.currentUser.login = loginValue.Text;
         }
 
-        private void Logout_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Wylogowanie użytkownika");
-        }
+        
     }
 }

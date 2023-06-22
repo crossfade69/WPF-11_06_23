@@ -8,6 +8,9 @@
 
         mc:Ignorable="d"
         Height="222" Width="444"
+        MinHeight="222" MinWidth="444"
+        MaxHeight="222" MaxWidth="444"
+        
         WindowStyle = "None"
         ResizeMode="CanResize" 
         MouseLeftButtonDown="WindowDrag"
