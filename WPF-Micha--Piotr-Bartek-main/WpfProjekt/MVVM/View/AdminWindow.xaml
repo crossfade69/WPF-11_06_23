@@ -12,7 +12,7 @@
         <TabItem Name="UsersTab" Header="Użytkownicy">
 
             <Grid Background="#FF2D2D2D">
-                <ListBox Name="UserListBox" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="UserListBox_SelectionChanged" HorizontalAlignment="Left" Width="236" Margin="0,10,0,0"/>
+                <ListBox Name="UserListBox" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" Width="236" Margin="0,10,0,0"/>
                 <Grid Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="549" Height="46">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -28,17 +28,17 @@
                     <Button Name="AddUser" Margin="5" Grid.Column="1" Grid.Row="0" Content="Dodaj" Click="AddUser_Click"/>
                     <Button Name="DeleteUser"  Margin="5" Grid.Column="2" Grid.Row="0" Content="Usuń" Click="DeleteUser_Click"/>
                 </Grid>
-                <Grid Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="134">
-                    <TextBox Name="loginValue" HorizontalAlignment="Left" Margin="109,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="24" FontSize="16"/>
+                <Grid Name="szczegolyUser" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="134">
+                    <TextBox Name="loginValue" HorizontalAlignment="Left" Margin="109,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="24" FontSize="16" Text="{Binding Path=login}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="62,10,0,0" TextWrapping="Wrap" Text="login" VerticalAlignment="Top" Width="41" Foreground="#FFCFCFCF" FontSize="16"/>
 
-                    <TextBox Name="passwordValue" HorizontalAlignment="Left" Margin="109,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="24" FontSize="16"/>
+                    <TextBox Name="passwordValue" HorizontalAlignment="Left" Margin="109,39,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="24" FontSize="16" Text="{Binding Path=password}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="34,40,0,0" TextWrapping="Wrap" Text="password" VerticalAlignment="Top" Width="68" Foreground="#FFCFCFCF" FontSize="16"/>
 
-                    <TextBox Name="usernameValue" HorizontalAlignment="Left" Margin="109,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="24" FontSize="16"/>
+                    <TextBox Name="usernameValue" HorizontalAlignment="Left" Margin="109,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="434" Height="24" FontSize="16" Text="{Binding Path=username}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="32,70,0,0" TextWrapping="Wrap" Text="username" VerticalAlignment="Top" Width="70" Foreground="#FFCFCFCF" FontSize="16"/>
 
-                    <CheckBox Name="isAdminValue"  HorizontalAlignment="Left" Margin="109,104,0,0" VerticalAlignment="Top" Checked="isAdminValue_Checked"/>
+                    <CheckBox Name="isAdminValue"  HorizontalAlignment="Left" Margin="109,104,0,0" VerticalAlignment="Top" Checked="isAdminValue_Checked" IsChecked="{Binding Path=isAdmin}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,100,0,0" TextWrapping="Wrap" Text="admin status" VerticalAlignment="Top" Width="92" Foreground="#FFCFCFCF" FontSize="16"/>
                 </Grid>
             </Grid>
@@ -47,7 +47,7 @@
 
         <TabItem Name="GameTab" Header="Gry">
             <Grid Background="#FF2D2D2D">
-                <ListBox Name="GamesListBox" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="GamesListBox_SelectionChanged" HorizontalAlignment="Left" Width="236" Margin="0,10,0,0"/>
+                <ListBox Name="GamesListBox" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" Width="236" Margin="0,10,0,0"/>
                 <Grid Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="549" Height="46">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -61,17 +61,17 @@
                     <Button Name="AddGame" Margin="5" Grid.Column="0" Grid.Row="0" Content="Dodaj" Click="AddGame_Click"/>
                     <Button Name="DeleteGame" Margin="5" Grid.Column="1" Grid.Row="0" Content="Usuń" Click="DeleteGame_Click"/>
                 </Grid>
-                <Grid Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="119" Width="539">
-                    <TextBox Name="titleValue" HorizontalAlignment="Left" Margin="104,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="435" Height="24" FontSize="16"/>
+                <Grid Name="szczegolyGame" Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" Height="119" Width="539">
+                    <TextBox Name="titleValue" HorizontalAlignment="Left" Margin="104,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="435" Height="24" FontSize="16" Text="{Binding Path=title}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="62,5,0,0" TextWrapping="Wrap" Text="title" VerticalAlignment="Top" Width="38" Foreground="#FFCFCFCF" FontSize="16"/>
 
-                    <ComboBox Name="catValue" HorizontalAlignment="Left" Margin="105,38,0,0" VerticalAlignment="Top" Width="434" SelectionChanged="catValue_SelectionChanged"/>
+                    <ComboBox Name="catValue" HorizontalAlignment="Left" Margin="105,38,0,0" VerticalAlignment="Top" Width="434" SelectionChanged="catValue_SelectionChanged"  Text="{Binding Path=category}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="24,35,0,0" TextWrapping="Wrap" Text="category" VerticalAlignment="Top" Width="76" Foreground="#FFCFCFCF" FontSize="16"/>
 
-                    <TextBox Name="imagepathValue" HorizontalAlignment="Left" Margin="104,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="435" Height="24" FontSize="16"/>
+                    <TextBox Name="imagepathValue" HorizontalAlignment="Left" Margin="104,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="435" Height="24" FontSize="16" Text="{Binding Path=imageDir}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="8,65,0,0" TextWrapping="Wrap" Text="imagepath" VerticalAlignment="Top" Width="92" Foreground="#FFCFCFCF" FontSize="16"/>
 
-                    <TextBox Name="ratingValue" HorizontalAlignment="Left" Margin="104,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="435" Height="24" FontSize="16"/>
+                    <TextBox Name="ratingValue" HorizontalAlignment="Left" Margin="104,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="435" Height="24" FontSize="16" Text="{Binding Path=rating}"/>
                     <TextBlock HorizontalAlignment="Left" Margin="47,95,0,0" TextWrapping="Wrap" Text="rating" VerticalAlignment="Top" Width="53" Foreground="#FFCFCFCF" FontSize="16"/>
                 </Grid>
             </Grid>
