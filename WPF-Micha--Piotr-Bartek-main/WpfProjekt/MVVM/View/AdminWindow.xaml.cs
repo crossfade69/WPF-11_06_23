@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -42,6 +43,17 @@ namespace WpfProjekt.MVVM.View
 
             LoadGamesFromDatabase();
             LoadUsersFromDatabase();
+
+            Binding szczegolyUserBinding = new Binding();
+            szczegolyUserBinding.Source = UserListBox;
+            szczegolyUserBinding.Path = new PropertyPath("SelectedItem");
+            szczegolyUser.SetBinding(Grid.DataContextProperty, szczegolyUserBinding);
+
+            Binding szczegolyGameBinding = new Binding();
+            szczegolyGameBinding.Source = GamesListBox;
+            szczegolyGameBinding.Path = new PropertyPath("SelectedItem");
+            szczegolyUser.SetBinding(Grid.DataContextProperty, szczegolyGameBinding);
+
         }
 
         private void LoadGamesFromDatabase()
@@ -163,7 +175,7 @@ namespace WpfProjekt.MVVM.View
             adminWindow2.Show();
         }
 
-        private void UserListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /*private void UserListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             selectedUserItem = (ListBoxItem)UserListBox.SelectedItem;
             if (selectedUserItem != null)
@@ -174,7 +186,7 @@ namespace WpfProjekt.MVVM.View
                 usernameValue.Text = selectedUser.username;
                 isAdminValue.IsChecked = selectedUser.isAdmin;
             }
-        }
+        }*/
 
 
         private void DisplayUsersInList(List<User> Users)
