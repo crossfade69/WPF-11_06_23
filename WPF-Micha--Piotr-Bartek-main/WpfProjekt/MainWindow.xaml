@@ -154,7 +154,7 @@
                         Foreground="White"
                         FontSize="14"
                         Style="{StaticResource MenuButtonTheme}"
-                        Command="{Binding ProfileViewCommand}" Checked="LoginCheck"/>
+                        Command="{Binding ProfileViewCommand}"/>
                 <Image Name="imageTest" Height="46" Width="38"/>
 
             </StackPanel>

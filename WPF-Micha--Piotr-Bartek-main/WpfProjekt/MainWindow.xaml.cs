@@ -91,12 +91,6 @@ namespace WpfProjekt
             }
         }
 
-        private void LoginCheck(object sender, RoutedEventArgs e)
-        {
-            session.Login("Michał", "Napiórkowski");
-            
-        }
-
         private void CheckAdmin()
         {
             if (session.currentUser != null && session.currentUser.isAdmin)
