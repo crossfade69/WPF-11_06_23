@@ -5,18 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfProjekt"
         mc:Ignorable="d"
-        Title="EditProfWindow" Height="300" Width="600">
+        Title="EditProfWindow" Height="180" Width="400"
+        MinHeight="180" MinWidth="400"
+        MaxHeight="180" MaxWidth="400">
     <Grid Background="#FF2D2D2D">
         <!-- Profile Information -->
-        <StackPanel HorizontalAlignment="Stretch" Margin="0,20,0,0" Width="590">
-            <TextBox Name="usernameValue" Text="" FontSize="20" FontWeight="Bold" Width="560" />
-            <TextBox Name="loginValue" Text="" Margin="0,10,0,0" Width="560"/>
-            <TextBox Name="passwordValue" Text="" Margin="0,10,0,0" Width="560"/>
+        <StackPanel HorizontalAlignment="Stretch" Margin="0,20,0,0" Width="390">
+            <TextBox Name="usernameValue" Text="" FontSize="20" FontWeight="Bold" Width="360" />
+            <TextBox Name="loginValue" Text="" Margin="0,10,0,0" Width="360"/>
+            <TextBox Name="passwordValue" Text="" Margin="0,10,0,0" Width="360"/>
 
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Right" Margin="0,20,20,0">
-            <Button Content="Edit Profile" Width="100" Margin="0,150,0,0" Click="Edit_Click"/>
+        <StackPanel HorizontalAlignment="Right" Margin="0,115,20,0">
+            <Button Content="Edit Profile" Width="100" Click="Edit_Click"/>
         </StackPanel>
     </Grid>
 </Window>

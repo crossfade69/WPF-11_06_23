@@ -39,11 +39,20 @@ namespace WpfProjekt
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            session.currentUser.username = usernameValue.Text;
-            session.currentUser.password = passwordValue.Text;
-            session.currentUser.login = loginValue.Text;
+            if (ConfirmDataChange())
+            {
+                session.currentUser.username = usernameValue.Text;
+                session.currentUser.password = passwordValue.Text;
+                session.currentUser.login = loginValue.Text;
+            }
         }
 
-        
+        private bool ConfirmDataChange()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to change your data?", "Confirmation", MessageBoxButton.YesNo);
+            return result == MessageBoxResult.Yes;
+        }
+
+
     }
 }
